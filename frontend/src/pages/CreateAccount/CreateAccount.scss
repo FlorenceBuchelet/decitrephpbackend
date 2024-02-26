@@ -1,0 +1,56 @@
+@import "../../variables";
+
+
+.createAccount__title {
+    width: 100%;
+    border: 1px solid;
+    border-color: transparent transparent rgb(179, 176, 176) transparent;
+    margin-inline: 1%;
+    padding-bottom: 10px;
+}
+
+.createAccount__input--text {
+    all: unset;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.createAccount__form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-inline: 12%;
+    gap: 10px;
+    & label {
+        font-weight: bold;
+    }
+    & input {
+        border: 1px solid lightgrey;
+    }
+    &--button {
+        @include redButtons;
+        max-width: 150px;
+        padding: 8px;
+        padding-inline: 25px;
+        margin-inline: auto;
+        margin-top: 2%;
+    }
+}
+
+.createAccount__genders {
+    display: flex;
+    align-items: center;
+    & label {
+        font-weight: 100;
+        margin-inline: 10px;
+        margin-inline-end: 20px;
+    }
+}
+
+.createAccount__password--specs {
+    font-size: 0.9rem;
+}
+
+.createAccount__mandatory {
+    margin-top: 1rem;
+}

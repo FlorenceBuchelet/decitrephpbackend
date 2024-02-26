@@ -1,0 +1,60 @@
+@import '../../variables';
+
+.profileProduct__card {
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+    margin-inline-start: 20px;
+}
+
+.profileProduct__img {
+    height: 95px;
+}
+
+.profileProduct__card--content p {
+    margin-block-start: 10px;
+    &:first-child {
+        margin-block-start: 0;
+    }
+}
+
+.profileProduct__title {
+    font-weight: bold;
+}
+
+.profileProduct__author {
+    font-size: 0.9rem;
+    color: $dark-blue;
+}
+
+.profileProduct__price {
+    font-weight: bold;
+    color: $dark-red;
+    font-size: 1.2rem;
+}
+
+.profileProduct__quantity {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    & input {
+        width: 30px;
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    & button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        background-color: #DDD;
+        border-radius: 3px;
+        font-weight: bold;
+    }
+}
+
+
+.profileProduct__total--price {
+    text-align: center;
+    font-weight: bold;
+}

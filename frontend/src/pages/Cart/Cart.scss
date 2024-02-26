@@ -1,0 +1,78 @@
+@import '../../variables';
+
+.cart__breadcrumb {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-block: 20px;
+    & span {
+        font-weight: bold;
+        color: rgb(159, 159, 159);
+        &:first-child {
+            color: $font-color;
+        }
+    }
+}
+
+.cart {
+    & table {
+        border: 1px solid #c8c8c8;
+        width: 90%;
+        margin: auto;
+    }
+    & thead {
+        background-color: #CCCCCC;
+        & td {
+            text-align: center;
+            padding: 5px;
+            font-size: small;
+            &:first-child {
+                text-align: start;
+                padding-inline-start: 30px;
+            }
+        }
+    }
+}
+
+.cart__tableHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 88%;
+    margin: auto;
+    margin-bottom: 1%;
+    margin-top: 2%;
+    &--top {
+        margin-top: 10%;
+    }
+    & span {
+        align-items: center;
+        display: flex;
+        width: fit-content;
+        & p {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.cart__total {
+    color: $dark-red;
+    font-weight: bold;
+    margin-inline: 30px;
+}
+
+.cart__button--back {
+    @include redButtons;
+    padding: 7px;
+    background-color: #DDDDDD;
+    color: $font-color;
+    padding-inline: 10px;
+    font-size: 0.9rem;
+    
+}
+
+.cart__button--validation {
+    @include redButtons;
+    padding: 7px;
+    padding-inline: 10px;
+}

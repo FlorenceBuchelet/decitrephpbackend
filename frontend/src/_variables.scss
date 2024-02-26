@@ -1,0 +1,26 @@
+$white: white;
+$light-grey: #F4F4F4;
+$dark-red: #C6230E;
+$dark-blue: #24334e;
+$light-blue: #25A8D4;
+$font-color: #333333;
+
+@mixin redButtons {
+    color: $white;
+    font-weight: bold;
+    background-color: $dark-red;
+    padding: 5%;
+    padding-inline: 8%;
+    border-radius: 5px;
+    text-align: center;
+    &:hover {
+        background-color: rgb(209, 14, 14);
+    }
+}
+
+@mixin breadcrumb {
+    color: $light-blue;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 1%;
+}
