@@ -21,13 +21,21 @@ function Login() {
                 body: formData,
             });
 
+            // ok je n'ai pas besoin de lire le cookie
+            // Je dois faire une seconde request avec les informations de l'utilisateur dans lequel j'envoie le cookie d'auth
+
+            console.log('response', response);
             if (response.ok) {
-                // Lire le cookie
-                console.log("cookie", document.cookie);
-                const cookie = document.cookie;
-                const authCookie = cookie.split(';').find(cookie => cookie.trim().startsWith('auth='));
-                const authCookieValue = authCookie ? authCookie.trim().substring(5) : null;
-                console.log("authCookieValue", authCookieValue);
+                // fetch les informations du user connecté et vérifie que sa session est toujours en cours
+                try {
+                    const response = await fetch('http://decitrephpbackend/src/userRoutes/getOneUser.php', {
+                        Credentials: 'include'
+                    });
+                    const user = await response.json();
+                    console.log("user", user);
+                } catch (error) {
+                    console.error("Error while fetching user's data ", error);
+                }
                 // navigate("/checkout/cart"); 
             } else {
                 const errorMessage = await response.text();

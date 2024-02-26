@@ -20,10 +20,10 @@ if ($dbh) {
 
     if (isset($readAuth)) {
         session_start();
-        // echo json_encode($readAuth);
-/*         $_SESSION['email'] = '$readAuth[0]['email']';
-        setcookie('auth', $_SESSION['email'], time() + 300, '/'); // 5min
- */    } else {
+        echo json_encode($readAuth);
+        $_SESSION['email'] = $readAuth[0]['email'];
+        setcookie('auth', $_SESSION['email'], time() + 5000, '/'); // 5min
+    } else {
         echo 'No matching account';
     }
 } else {

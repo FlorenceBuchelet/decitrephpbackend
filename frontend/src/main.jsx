@@ -9,6 +9,7 @@ import Others from './pages/Others/Others.jsx';
 import Login from './pages/Login/Login.jsx';
 import Cart from './pages/Cart/Cart.jsx';
 import CreateAccount from './pages/CreateAccount/CreateAccount.jsx';
+import { UserProvider } from './contexts/authContext.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ProfileProductProvider>
-      <RouterProvider router={router} />
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
     </ProfileProductProvider>
   </React.StrictMode>,
 )
