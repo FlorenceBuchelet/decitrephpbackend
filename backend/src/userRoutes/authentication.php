@@ -18,14 +18,16 @@ if ($dbh) {
     $selectStatement->execute();
     $readAuth = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
 
-    if (isset($readAuth)) {
+    if (isset($readAuth) && !empty($readAuth)) {
+        ini_set('session.cookie_lifetime', 3600); // Durée de vie de 1 heure (en secondes)
         session_start();
-        echo json_encode($readAuth);
         $_SESSION['email'] = $readAuth[0]['email'];
-        setcookie('auth', $_SESSION['email'], time() + 5000, '/'); // 5min
+        $_SESSION['cart'] = [];
+        
+        // print_r($_SESSION);
     } else {
         echo 'No matching account';
     }
 } else {
-    echo 'Error during db connexion';
+    echo 'Error during db connection';
 }

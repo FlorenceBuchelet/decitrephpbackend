@@ -18,5 +18,5 @@ if ($dbh) {
     $autocomplete = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
     echo json_encode($autocomplete);
 } else {
-    echo "Error during db connexion.";
+    echo "Error during db connection.";
 }

@@ -5,19 +5,38 @@ require '../../databaseConnect.php';
 $dbh = dbConnect();
 
 if ($dbh) {
-    $email = isset($_GET['email']) ? $_GET['email'] : '';
-    // Récupérer la valeur du cookie 'auth'
-    $authCookie = isset($_COOKIE['auth']) ? $_COOKIE['auth'] : null;
+    // print_r($_SESSION);
 
-    // Utiliser la valeur du cookie comme nécessaire
-    echo "Contenu du cookie 'auth': " . $authCookie;
+    if (isset($_GET['id'])) {
+        $id = isset($_GET['id']) ? $_GET['id'] : '';
+        $selectStatement = $dbh->prepare("SELECT * FROM user WHERE user_id = :id");
+        $selectStatement->bindParam(':id', $id);
+        $selectStatement->execute();
+        $readOneUser = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
+        echo json_encode($readOneUser);
+    }
 
-    $selectStatement = $dbh->prepare("SELECT * FROM user WHERE email = :email");
-    $selectStatement->bindParam(':email', $email);
-    $selectStatement->execute();
-    // Récupère les résultats sous forme de tableau associatif
-    $readOneUser = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
-    echo json_encode($readOneUser);
+    if (isset($_SESSION) && !empty($_SESSION)) {
+        session_start();
+        $email = $_SESSION['email'];
+
+        $selectStatement = $dbh->prepare("SELECT * FROM user WHERE email = :email");
+        $selectStatement->bindParam(':email', $email);
+        $selectStatement->execute();
+        $readOneUser = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
+        echo json_encode($readOneUser);
+    } /* else {
+    echo 'chips';
+}
+// Check if the cookie is received in the request
+if (isset($_SERVER['HTTP_COOKIE'])) {
+    // Get the value of the cookie
+    $cookieValue = $_SERVER['HTTP_COOKIE'];
+    // Output the received cookie value
+    echo "Received cookie value: " . $cookieValue;
 } else {
-    echo "Error during db connexion.";
+    echo "No cookie received in the request.";
+}  */
+} else {
+    echo "Error during db connection.";
 }

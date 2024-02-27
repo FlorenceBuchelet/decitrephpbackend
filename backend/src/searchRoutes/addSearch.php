@@ -21,5 +21,5 @@ if ($dbh) {
 
     $insertStatement->execute();
 } else {
-    echo "Error during db connexion.";
+    echo "Error during db connection.";
 }

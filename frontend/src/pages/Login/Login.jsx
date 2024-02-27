@@ -1,8 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './Login.scss';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
+    const [authError, setAuthError] = useState("");
     const emailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
@@ -21,31 +22,32 @@ function Login() {
                 body: formData,
             });
 
-            // ok je n'ai pas besoin de lire le cookie
-            // Je dois faire une seconde request avec les informations de l'utilisateur dans lequel j'envoie le cookie d'auth
-
             console.log('response', response);
             if (response.ok) {
-                // fetch les informations du user connecté et vérifie que sa session est toujours en cours
-                try {
-                    const response = await fetch('http://decitrephpbackend/src/userRoutes/getOneUser.php', {
-                        Credentials: 'include'
-                    });
-                    const user = await response.json();
-                    console.log("user", user);
-                } catch (error) {
-                    console.error("Error while fetching user's data ", error);
-                }
-                // navigate("/checkout/cart"); 
-            } else {
+                console.log("response is ok");
                 const errorMessage = await response.text();
                 if (errorMessage === 'No matching account') {
                     // proposer la création de compte
-                    console.log(errorMessage);
-                } else {
+                    setAuthError("Votre email et/ou votre mot de passe ne correspondent pas.")
+                } else if (errorMessage) {
                     // gérer les erreurs de frappe
-                    console.log(errorMessage);
+                    console.log("Error: ", errorMessage);
+                } else {
+                    // fetch les informations du user connecté et vérifie que sa session est toujours en cours
+                    console.log("There's a matching acc");
+                    /* try {
+                        const response = await fetch('http://decitrephpbackend/src/userRoutes/getOneUser.php', {
+                            credentials: 'include'
+                        });       
+                        console.log("second fetch response", response);             
+                        const user = await response.json();
+                        console.log("user", user);
+                    } catch (error) {
+                        console.error("Error while fetching user's data ", error);
+                    } */
+                    navigate("/checkout/cart"); 
                 }
+
             }
         } catch (error) {
             console.error('Error during authentication: ', error);
@@ -56,7 +58,7 @@ function Login() {
     return (
         <main className='login'>
             <p className='login__welcome breadcrumb'>Connexion</p>
-            <section className='login__connexion'>
+            <section className='login__connection'>
                 <aside className='login__asides'>
                     <h3 className='login__titles'>Vous avez déjà un compte ?</h3>
                     <form className='login__form' onSubmit={handleSubmit} >
@@ -66,6 +68,7 @@ function Login() {
                             <label htmlFor='password'>Mot de passe</label>
                             <input id='password' type='password' ref={passwordRef} />
                         </span>
+                        <p className='login__error'>{authError}</p>
                         <button className='login__submit' type='submit'>Connexion</button>
                     </form>
                 </aside>

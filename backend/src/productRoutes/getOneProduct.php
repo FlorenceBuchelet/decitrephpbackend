@@ -16,5 +16,5 @@ if ($dbh) {
     $readOneProduct = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
     echo json_encode($readOneProduct);
 } else {
-    echo "Error during db connexion.";
+    echo "Error during db connection.";
 }

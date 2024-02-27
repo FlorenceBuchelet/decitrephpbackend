@@ -4,7 +4,6 @@ import { ProfileProductContext } from '../../contexts/profileProductContext';
 
 function CartLine() {
     const { profileProduct } = useContext(ProfileProductContext);
-    console.log(profileProduct);
 
     return (
         <>
@@ -21,7 +20,7 @@ function CartLine() {
             <td>
                 <span className='profileProduct__quantity'>
                 <button>-</button>
-                <input value='1' />
+                <input defaultValue='0' />
                 <button>+</button>
                 </span>
             </td>

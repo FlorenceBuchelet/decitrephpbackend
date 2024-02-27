@@ -41,5 +41,5 @@ if ($dbh) {
         echo 'Email already in use';
     }
 } else {
-    echo 'Error during db connexion';
+    echo 'Error during db connection';
 }

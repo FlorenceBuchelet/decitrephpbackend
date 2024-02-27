@@ -14,7 +14,7 @@
     }
 }
 
-.login__connexion {
+.login__connection {
     display: flex;
     justify-content: center;
     gap: 10%;
@@ -60,4 +60,8 @@
     width: 50%;
     max-width: 150px;
     padding-block: 10px;
+}
+
+.login__error {
+    color: $dark_red;
 }

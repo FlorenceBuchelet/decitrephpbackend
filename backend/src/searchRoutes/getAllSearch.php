@@ -11,5 +11,5 @@ if ($dbh) {
     $readAllSearch = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
     echo json_encode($readAllSearch);
 } else {
-    echo "Error during db connexion.";
+    echo "Error during db connection.";
 }

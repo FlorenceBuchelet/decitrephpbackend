@@ -10,6 +10,7 @@ import Login from './pages/Login/Login.jsx';
 import Cart from './pages/Cart/Cart.jsx';
 import CreateAccount from './pages/CreateAccount/CreateAccount.jsx';
 import { UserProvider } from './contexts/authContext.jsx';
+import Profile from './pages/Profile/Profile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/customer/account/login",
         element: <Login />,
+      },
+      {
+        path: "/customer/account",
+        element: <Profile />,
       },
       {
         path: "/checkout/cart",

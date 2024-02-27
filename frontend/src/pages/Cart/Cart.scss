@@ -76,3 +76,8 @@
     padding: 7px;
     padding-inline: 10px;
 }
+
+.cart__disconnect {
+    @include redButtons;
+    margin-inline-start: 82%;
+}
