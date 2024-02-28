@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Profile.scss";
 
 function Profile() {
+    const [user, setUser] = useState([{}]);
     const emailRef = useRef();
     // gender
     const firstnameRef = useRef("");
@@ -9,15 +10,17 @@ function Profile() {
     const phoneRef = useRef("");
     const addressRef = useRef("");
 
-    // mock data
-    const user = { "user_id": 1 };
-
-    // préremplir le form
+    // préremplissage du form
     useEffect(() => {
+
         const currentUser = async () => {
             try {
-                const response = await fetch(`http://decitrephpbackend/src/userRoutes/getOneUser.php?id=${user.user_id}`)
+                const response = await fetch('http://decitrephpbackend/src/userRoutes/getOneUser.php', {
+                    credentials: 'include'
+                });
                 const fetchedUser = await response.json();
+                setUser(fetchedUser);
+
                 emailRef.current.value = fetchedUser[0].email;
                 firstnameRef.current.value = fetchedUser[0].firstname;
                 lastnameRef.current.value = fetchedUser[0].lastname;
@@ -30,12 +33,11 @@ function Profile() {
         currentUser();
     }, []);
 
-    // cette page doit fetch les infos de l'utilisateur
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('userId', user.user_id);
+        formData.append('userId', user[0].user_id);
         formData.append('email', emailRef.current.value);
         // formData.append('gender', ??);
         formData.append('firstname', firstnameRef.current.value);
@@ -50,7 +52,7 @@ function Profile() {
                     body: formData
                 });
             if (response.ok) {
-                console.log("user updated, I guess.");
+                console.log("user updated.");
             }
         } catch (error) {
             console.error("Error in updating user data: ", error);
@@ -75,7 +77,7 @@ function Profile() {
                 <label htmlFor="firstname">Prénom* :</label>
                 <input className="profile__input--text" id="firstname" ref={firstnameRef} required />
                 <label htmlFor="lastname">Nom* :</label>
-                <input className="profile__input--text" id="lastname" ref={lastnameRef} required />                
+                <input className="profile__input--text" id="lastname" ref={lastnameRef} required />
                 <label htmlFor="phone">Numéro de téléphone :</label>
                 <input className="profile__input--text" type="tel" id="phone" ref={phoneRef} required />
                 <label htmlFor="address">Adresse de livraison :</label>

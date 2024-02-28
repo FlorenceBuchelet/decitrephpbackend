@@ -5,7 +5,8 @@ export const UserContext = createContext();
 
 export function UserProvider({ children }) {
     const [user, setUser] = useState([{}]);
-    const authUser = useMemo(() => ({ user, setUser }), [user, setUser]);
+    const [phpsessid, setPhpsessid] = useState("");
+    const authUser = useMemo(() => ({ user, setUser, phpsessid, setPhpsessid }), [user, setUser, phpsessid, setPhpsessid]);
 
     return <UserContext.Provider value={authUser}>{children}</UserContext.Provider>;
 }

@@ -3,7 +3,6 @@ import CartLine from "../../components/CartLine/CartLine";
 import "./Cart.scss";
 import { Link, useNavigate } from "react-router-dom";
 
-
 function Cart() {
     const navigate = useNavigate();
     const [cartContent, setCartContent] = useState([]);
@@ -11,7 +10,8 @@ function Cart() {
     // Ici il faut fetch le cart du user
     // mettre à jour un tableau d'objets avec ce qu'il contient
     // map ce tableau
-    // quand le user clique sur "ajouter au panier", le panier dans sa session est updaté
+
+    // doit fetch la session chaque fois qu'elle est updatée : à l'affichage de la page, au changement de quantité d'un produit
 
     useEffect(() => {
         const userInfo = async () => {
@@ -20,7 +20,6 @@ function Cart() {
                 const response = await fetch('http://decitrephpbackend/src/userRoutes/getOneUser.php', {
                     credentials: 'include'
                 });
-                console.log("cart fetch response", response);
                 const user = await response.json();
                 console.log("user", user);
             } catch (error) {

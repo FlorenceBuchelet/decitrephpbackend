@@ -18,6 +18,7 @@ function Others() {
                 {productsArray ? productsArray.sort(() => 0.5 - Math.random()).toReversed().slice(0, 5).map((product) => (
                         <ProductCard
                             key={product.product_id}
+                            id={product.product_id}
                             ean={product.ean}
                             title={product.title}
                             image={product.image}

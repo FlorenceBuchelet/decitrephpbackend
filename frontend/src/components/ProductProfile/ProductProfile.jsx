@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import "./ProductProfile.scss";
 import { ProfileProductContext } from "../../contexts/profileProductContext";
+import handleOrder from "../../services/handleOrder";
 
 function ProductProfile() {
     const { profileProduct } = useContext(ProfileProductContext);
@@ -19,7 +20,7 @@ function ProductProfile() {
                         {/* <p>{summary}</p> */}
                         <p>{profileProduct[0].price} €</p>
                         <p>EAN : {profileProduct[0].ean}</p>
-                        <button className="productProfile__button" type="button">Commander</button>
+                        <button onClick={() => handleOrder(profileProduct[0].id)} className="productProfile__button" type="button">Commander</button>
                     </aside>
                 </article>
                 : "Loading"}

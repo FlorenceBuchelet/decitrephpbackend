@@ -1,9 +1,14 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import './Login.scss';
 import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from "../../contexts/userContext";
+
 
 function Login() {
     const [authError, setAuthError] = useState("");
+
+    const { setPhpsessid } = useContext(UserContext);
+
     const emailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
@@ -15,39 +20,21 @@ function Login() {
             const formData = new FormData();
             formData.append('email', emailRef.current.value);
             formData.append('password', passwordRef.current.value);
-            console.log(formData);
 
             const response = await fetch('http://decitrephpbackend/src/userRoutes/authentication.php', {
                 method: "POST",
+                credentials: 'include',
                 body: formData,
             });
 
-            console.log('response', response);
             if (response.ok) {
-                console.log("response is ok");
-                const errorMessage = await response.text();
-                if (errorMessage === 'No matching account') {
-                    // proposer la création de compte
+                const message = await response.text();
+                if (message === 'No matching account') {
                     setAuthError("Votre email et/ou votre mot de passe ne correspondent pas.")
-                } else if (errorMessage) {
-                    // gérer les erreurs de frappe
-                    console.log("Error: ", errorMessage);
                 } else {
-                    // fetch les informations du user connecté et vérifie que sa session est toujours en cours
-                    console.log("There's a matching acc");
-                    /* try {
-                        const response = await fetch('http://decitrephpbackend/src/userRoutes/getOneUser.php', {
-                            credentials: 'include'
-                        });       
-                        console.log("second fetch response", response);             
-                        const user = await response.json();
-                        console.log("user", user);
-                    } catch (error) {
-                        console.error("Error while fetching user's data ", error);
-                    } */
-                    navigate("/checkout/cart"); 
+               //     setPhpsessid(message);
+                    navigate("/customer/account"); 
                 }
-
             }
         } catch (error) {
             console.error('Error during authentication: ', error);

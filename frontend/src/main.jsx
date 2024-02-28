@@ -9,7 +9,7 @@ import Others from './pages/Others/Others.jsx';
 import Login from './pages/Login/Login.jsx';
 import Cart from './pages/Cart/Cart.jsx';
 import CreateAccount from './pages/CreateAccount/CreateAccount.jsx';
-import { UserProvider } from './contexts/authContext.jsx';
+import { UserProvider } from './contexts/userContext.jsx';
 import Profile from './pages/Profile/Profile.jsx';
 
 const router = createBrowserRouter([

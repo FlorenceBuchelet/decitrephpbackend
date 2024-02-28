@@ -11,7 +11,6 @@ if ($dbh) {
     $lastname = isset($_POST['lastname']) ? trim($_POST['lastname']) : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-    print_r($gender);
     $selectStatement = $dbh->prepare(
         "SELECT user.email FROM user
         WHERE user.email = :email;"
