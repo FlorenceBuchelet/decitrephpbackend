@@ -12,20 +12,14 @@ if (isset($_COOKIE['PHPSESSID'])) {
     session_start();
 }
 
-
 $allowed_origin = 'http://localhost:5173';
 header("Access-Control-Allow-Origin: $allowed_origin");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Specificity, Authorization");
 header("Access-Control-Allow-Credentials: true");
 
-
-// Output the cart content as JSON
-// header('Content-Type: application/json');
-
-var_dump($_SESSION['cart']);
-// Assuming $_SESSION['cart'] contains your cart data
-// echo json_encode($_SESSION['cart']);
+// var_dump($_SESSION['cart']);
+echo json_encode($_SESSION['cart']);
 
 
     // if (produit) {$_SESSION['cart']['produit']['quantity'] = $_SESSION['cart']['produit']['quantity'] + 1};

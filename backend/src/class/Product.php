@@ -2,7 +2,7 @@
 
 namespace Products;
 
-class Product
+class Product implements \JsonSerializable
 {
     private int $productId;
     private int $ean;
@@ -73,5 +73,17 @@ class Product
     public function setPromoPrice(?float $promoPrice): void
     {
         $this->promoPrice = $promoPrice;
+    }
+    public function jsonSerialize(): array
+    {
+        return [
+            'productId' => $this->productId,
+            'ean' => $this->ean,
+            'title' => $this->title,
+            'image' => $this->image,
+            'author' => $this->author,
+            'price' => $this->price,
+            'promoPrice' => $this->promoPrice,
+        ];
     }
 }

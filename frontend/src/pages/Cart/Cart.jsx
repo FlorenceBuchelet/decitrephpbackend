@@ -7,10 +7,6 @@ function Cart() {
     const navigate = useNavigate();
     const [cartContent, setCartContent] = useState([]);
 
-    // Ici il faut fetch le cart du user
-    // mettre à jour un tableau d'objets avec ce qu'il contient
-    // map ce tableau
-
     // doit fetch la session chaque fois qu'elle est updatée : à l'affichage de la page, au changement de quantité d'un produit
 
     useEffect(() => {
@@ -20,9 +16,7 @@ function Cart() {
                 const response = await fetch('http://decitrephpbackend/src/productRoutes/getCart.php', {
                     credentials: 'include'
                 });
-                console.log("cart response", response);
                 const cart = await response.json();
-                console.log("cart", cart);
                 setCartContent(cart);
             } catch (error) {
                 console.error("Error while fetching user's data ", error);
@@ -33,7 +27,9 @@ function Cart() {
 
     const handleClick = async () => {
         try {
-            const response = await fetch('http://decitrephpbackend/src/userRoutes/disconnect.php');
+            const response = await fetch('http://decitrephpbackend/src/userRoutes/disconnect.php', {
+                credentials: 'include'
+            });
             const textResponse = await response.text();
             if (textResponse === "disconnected") {
                 navigate('/');
@@ -77,8 +73,7 @@ function Cart() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            {cartContent.map((product) => (
+                        {cartContent.map((product) => (
                                 <CartLine
                                     key={product.product_id}
                                     id={product.product_id}
@@ -89,8 +84,7 @@ function Cart() {
                                     promoPrice={product.promo_price}
                                     quantity={product.quantity}
                                 />
-                            ))}
-                        </tr>
+                        ))}
                     </tbody>
                 </table>
                 <span className="cart__tableHeader">

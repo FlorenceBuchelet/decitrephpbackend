@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ProfileProductProvider } from './contexts/profileProductContext.jsx';
 import App from './App.jsx';

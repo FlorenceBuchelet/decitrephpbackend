@@ -100,5 +100,8 @@
         font-size: small;
         color: $light-blue;
         margin-top: 10px;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
