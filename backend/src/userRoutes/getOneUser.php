@@ -4,6 +4,7 @@ if (isset($_COOKIE['PHPSESSID'])) {
     session_id($_COOKIE['PHPSESSID']);
     session_start();
 }
+
 require '../../databaseConnect.php';
 
 $dbh = dbConnect();

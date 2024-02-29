@@ -17,11 +17,13 @@ function Cart() {
         const userInfo = async () => {
 
             try {
-                const response = await fetch('http://decitrephpbackend/src/userRoutes/getOneUser.php', {
+                const response = await fetch('http://decitrephpbackend/src/productRoutes/getCart.php', {
                     credentials: 'include'
                 });
-                const user = await response.json();
-                console.log("user", user);
+                console.log("cart response", response);
+                const cart = await response.json();
+                console.log("cart", cart);
+                setCartContent(cart);
             } catch (error) {
                 console.error("Error while fetching user's data ", error);
             }
@@ -55,40 +57,60 @@ function Cart() {
                 <span>Confirmation</span>
             </p>
             <button onClick={handleClick} className="cart__disconnect">Déconnexion</button>
-            <span className="cart__tableHeader cart__tableHeader--top">
-                <Link to="/">
-                    <button className="cart__button--back">&lt; Poursuivre mes achats</button>
-                </Link>
-                <span>
-                    <p>Total :</p>
-                    <p className="cart__total">10,00 €</p>
-                    <button type="button"className="cart__button--validation">Valider mon panier &gt;</button>
+            {cartContent.length > 0 ? <>
+                <span className="cart__tableHeader cart__tableHeader--top">
+                    <Link to="/">
+                        <button className="cart__button--back">&lt; Poursuivre mes achats</button>
+                    </Link>
+                    <span>
+                        <p>Total :</p>
+                        <p className="cart__total">10,00 €</p>
+                        <button type="button" className="cart__button--validation">Valider mon panier &gt;</button>
+                    </span>
                 </span>
-            </span>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Produit</td>
-                        <td>Quantité</td>
-                        <td>Prix total</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <CartLine />
-                    </tr>
-                </tbody>
-            </table>
-            <span className="cart__tableHeader">
-                <Link to="/">
-                    <button className="cart__button--back">&lt; Poursuivre mes achats</button>
-                </Link>
-                <span>
-                    <p>Total :</p>
-                    <p className="cart__total">10,00 €</p>
-                    <button className="cart__button--validation">Valider mon panier &gt;</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Produit</td>
+                            <td>Quantité</td>
+                            <td>Prix total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {cartContent.map((product) => (
+                                <CartLine
+                                    key={product.product_id}
+                                    id={product.product_id}
+                                    image={product.image}
+                                    title={product.title}
+                                    author={product.author}
+                                    price={product.price}
+                                    promoPrice={product.promo_price}
+                                    quantity={product.quantity}
+                                />
+                            ))}
+                        </tr>
+                    </tbody>
+                </table>
+                <span className="cart__tableHeader">
+                    <Link to="/">
+                        <button className="cart__button--back">&lt; Poursuivre mes achats</button>
+                    </Link>
+                    <span>
+                        <p>Total :</p>
+                        <p className="cart__total">10,00 €</p>
+                        <button className="cart__button--validation">Valider mon panier &gt;</button>
+                    </span>
                 </span>
-            </span>
+            </> :
+                <span className="cart__redirect">
+                    <h3 className="cart__redirect--title">Retourner sur</h3>
+                    <ul className="cart__redirect--list">
+                        <li className="cart__redirect--links"><Link to={"/"}>&gt; la page d&apos;accueil</Link></li>
+                        <li className="cart__redirect--links"><Link to={"/customer/account"}>&gt; votre compte</Link></li>
+                    </ul>
+                </span>}
         </main>
     );
 }

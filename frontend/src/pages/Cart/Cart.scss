@@ -81,3 +81,24 @@
     @include redButtons;
     margin-inline-start: 82%;
 }
+
+.cart__redirect {
+    &--title {
+        width: 90%;
+        border-bottom: 1px solid $font-color;
+        margin: auto;
+    }
+    &--list {
+        width: 90%;
+        margin: auto;
+        list-style: none;
+        margin-top: 5px;
+    }
+    &--links {
+        width: 95%;
+        margin: auto;
+        font-size: small;
+        color: $light-blue;
+        margin-top: 10px;
+    }
+}
