@@ -1,4 +1,25 @@
-# React + Vite
+# PHP initiation
+
+During my first internship as a web developer, I worked for the biggest french online bookseller. In the first tree weeks there, I had to learn PHP since I had never tried my hand at it. In order to do that efficiently, I was tasked with creating a clone of their online platform with a front in React and a backend in PHP. The focus was to make both ends communicate seamlessly. 
+
+## Challenges
+
+Platform is an online bookshop so it needs to have:
+- A homepage with bestsellers products
+- A search bar with autocomplete based on how often a search is made
+- Product profiles
+- Product database
+- An authentification page
+- User database
+- User needs to be able to edit their informations
+- User needs to be able to create an account
+- User needs to be able to add products to their cart
+- The cart quantities can be updated in cart
+- Total in cart is calculated dynamically
+
+Technically, this means I got to learn PHP through OOP, session handling, API basics, database and cookies handling.
+
+## React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

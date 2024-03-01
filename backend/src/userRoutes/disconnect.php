@@ -9,13 +9,13 @@ if (isset($_COOKIE['PHPSESSID'])) {
 $allowed_origin = 'http://localhost:5173';
 header("Access-Control-Allow-Origin: $allowed_origin");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Specificity, Authorization");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
 
 // Unset all session variables
 $_SESSION = [];
 
-// Delete the session cookie
+// Clean tous les aspects du cookie et le détruit en le faisant se terminer dans le passé
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(
