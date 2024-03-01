@@ -5,12 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Cart() {
     const navigate = useNavigate();
-    const [cartContent, setCartContent] = useState([]);
-
-    // doit fetch la session chaque fois qu'elle est updatée : à l'affichage de la page, au changement de quantité d'un produit
+    const [cartContent, setCartContent] = useState({});
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
-        const userInfo = async () => {
+        const getCart = async () => {
 
             try {
                 const response = await fetch('http://decitrephpbackend/src/productRoutes/getCart.php', {
@@ -22,10 +21,10 @@ function Cart() {
                 console.error("Error while fetching user's data ", error);
             }
         }
-        userInfo();
+        getCart();
     }, [])
 
-    const handleClick = async () => {
+    const handleDisconnect = async () => {
         try {
             const response = await fetch('http://decitrephpbackend/src/userRoutes/disconnect.php', {
                 credentials: 'include'
@@ -37,6 +36,21 @@ function Cart() {
         } catch (error) {
             console.error("Error: ", error)
         }
+    }
+
+    const handleEmptyCart = async () => {
+        // ne fonctionne pas encore
+/*         try {
+            const response = await fetch('http://decitrephpbackend/src/userRoutes/disconnect.php', {
+                credentials: 'include'
+            });
+            const textResponse = await response.text();
+            if (textResponse === "disconnected") {
+                navigate('/');
+            }
+        } catch (error) {
+            console.error("Error: ", error)
+        } */
     }
 
     return (
@@ -52,15 +66,18 @@ function Cart() {
                 <span>&gt;</span>
                 <span>Confirmation</span>
             </p>
-            <button onClick={handleClick} className="cart__disconnect">Déconnexion</button>
-            {cartContent.length > 0 ? <>
+            <span className="cart__headerButtons">
+            <button onClick={handleEmptyCart} className="cart__emptyCart">Vider le panier</button>
+            <button onClick={handleDisconnect} className="cart__disconnect">Déconnexion</button>
+            </span>
+            {Object.keys(cartContent).length > 0 ? <>
                 <span className="cart__tableHeader cart__tableHeader--top">
                     <Link to="/">
                         <button className="cart__button--back">&lt; Poursuivre mes achats</button>
                     </Link>
                     <span>
                         <p>Total :</p>
-                        <p className="cart__total">10,00 €</p>
+                        <p className="cart__total">{totalPrice} €</p>
                         <button type="button" className="cart__button--validation">Valider mon panier &gt;</button>
                     </span>
                 </span>
@@ -73,18 +90,23 @@ function Cart() {
                         </tr>
                     </thead>
                     <tbody>
-                        {cartContent.map((product) => (
+                        {Object.keys(cartContent).map(key => {
+                            const product = cartContent[key];
+                            return (
                                 <CartLine
-                                    key={product.product_id}
-                                    id={product.product_id}
-                                    image={product.image}
-                                    title={product.title}
-                                    author={product.author}
-                                    price={product.price}
-                                    promoPrice={product.promo_price}
+                                    key={product.product.productId}
+                                    productId={product.product.productId}
+                                    image={product.product.image}
+                                    title={product.product.title}
+                                    author={product.product.author}
+                                    price={product.product.price}
+                                    promoPrice={product.product.promoPrice}
                                     quantity={product.quantity}
-                                />
-                        ))}
+                                    setTotalPrice={setTotalPrice}
+                                    totalPrice={totalPrice}
+                                /> 
+                            )
+                        })}
                     </tbody>
                 </table>
                 <span className="cart__tableHeader">
@@ -93,7 +115,7 @@ function Cart() {
                     </Link>
                     <span>
                         <p>Total :</p>
-                        <p className="cart__total">10,00 €</p>
+                        <p className="cart__total">{totalPrice} €</p>
                         <button className="cart__button--validation">Valider mon panier &gt;</button>
                     </span>
                 </span>

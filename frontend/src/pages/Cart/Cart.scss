@@ -14,6 +14,16 @@
     }
 }
 
+.cart__headerButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-inline: 2vw;
+    & .cart__disconnect, .cart__emptyCart {
+        @include redButtons;
+    }
+}
+
+
 .cart {
     & table {
         border: 1px solid #c8c8c8;
@@ -77,10 +87,6 @@
     padding-inline: 10px;
 }
 
-.cart__disconnect {
-    @include redButtons;
-    margin-inline-start: 82%;
-}
 
 .cart__redirect {
     &--title {

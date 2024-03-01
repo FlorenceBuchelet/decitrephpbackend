@@ -53,8 +53,15 @@
     }
 }
 
-
-.profileProduct__total--price {
+.profileProduct__prices {
     text-align: center;
     font-weight: bold;
+    &--old {
+        font-weight: normal;
+        font-size: small;
+        margin-bottom: 8px;
+    }
+    &--promo {
+        color: $dark-red;
+    }
 }

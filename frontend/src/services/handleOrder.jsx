@@ -1,6 +1,6 @@
 const handleOrder = async (productId) => {
     try {
-        await fetch(`http://decitrephpbackend/src/productRoutes/addToCart.php?productId=${productId}`, {
+        await fetch(`http://decitrephpbackend/src/productRoutes/addToCart.php?productId=${productId}&quantity=1`, {
             credentials: 'include',
         });
     } catch (error) {

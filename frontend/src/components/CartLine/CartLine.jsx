@@ -1,6 +1,21 @@
 import './CartLine.scss';
+import handleOrder from "../../services/handleOrder";
+import handleUnorder from "../../services/handleUnorder";
+import { useEffect, useState } from 'react';
 
-function CartLine({ id, image, title, author, price, promoPrice, quantity}) {
+
+function CartLine({ productId, image, title, author, price, promoPrice, quantity, setTotalPrice, totalPrice }) {
+    const [lineQuantity, setLineQuantity] = useState(quantity);
+
+const handlePlus = () => {
+    handleOrder(productId);
+    setLineQuantity(lineQuantity +1);
+};
+
+const handleMinus = () => {
+    handleUnorder(productId);
+    setLineQuantity(lineQuantity - 1);
+};
 
     return (
         <tr>
@@ -11,18 +26,24 @@ function CartLine({ id, image, title, author, price, promoPrice, quantity}) {
                 <span className='profileProduct__card--content'>
                     <p className='profileProduct__title'>{title ? title : ""}</p>
                     <p className='profileProduct__author'>{author ? author : ""}</p>
-                    <p className='profileProduct__price'>{price ? `${price} €` : ""}</p>
                 </span>
             </td>
             <td>
                 <span className='profileProduct__quantity'>
-                <button>-</button>
-                <input defaultValue={quantity ? quantity : ""} />
-                <button>+</button>
+                    <button onClick={handleMinus}>-</button>
+                    <input value={lineQuantity} onChange={() => {}} />
+                    <button onClick={handlePlus}>+</button>
                 </span>
             </td>
             <td className='profileProduct__total'>
-                <p className='profileProduct__total--price'>{price ? `${price} €` : ""}</p>
+                {promoPrice ?
+                    <>
+                        <p className='profileProduct__prices profileProduct__prices--old'><s>{`${price * lineQuantity} €`}</s></p>
+                        <p className='profileProduct__prices profileProduct__prices--promo'>{`${promoPrice * lineQuantity} €`}</p>
+                    </>
+                    :
+                    <p className='profileProduct__prices profileProduct__prices--current'>{price ? `${price * lineQuantity} €` : ""}</p>
+                }
             </td>
         </tr>
     );

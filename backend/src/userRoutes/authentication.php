@@ -21,7 +21,7 @@ if ($dbh) {
 
     if (isset($readAuth) && !empty($readAuth)) {
         $_SESSION['email'] = $readAuth[0]['email'];
-        $_SESSION['cart'] = [];
+        $_SESSION['cart'] = array();
         // echo session_id();
     } else {
         echo 'No matching account';
