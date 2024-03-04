@@ -34,17 +34,20 @@ if ($dbh) {
             $readOneProduct['price'],
             $readOneProduct['promo_price']
         );
+        $addToCartTotalPrice = $readOneProduct['promo_price'] || $readOneProduct['price'];
     }
     $newProductId = $newProduct->getProductId();
 
     if (isset($_SESSION['cart'][$newProductId])) {
         $_SESSION['cart'][$newProductId]['quantity'] += $quantity;
+        $_SESSION['cartTotalPrice'] += ($readOneProduct['promo_price'] ? $readOneProduct['promo_price'] : $readOneProduct['price']) * $quantity;
     } else {
         $_SESSION['cart'][$newProductId] =
             [
                 'product' => $newProduct,
                 'quantity' => $quantity,
             ];
+            $_SESSION['cartTotalPrice'] += ($readOneProduct['promo_price'] ? $readOneProduct['promo_price'] : $readOneProduct['price']) * $quantity;
     }
 
     if ($_SESSION['cart'][$newProductId]['quantity'] === 0) {
@@ -52,6 +55,7 @@ if ($dbh) {
     }
 
     var_dump($_SESSION['cart']); // réponse front pour vérification
+    var_dump($_SESSION['cartTotalPrice']);
 } else {
     echo "Error during db connection.";
 }
