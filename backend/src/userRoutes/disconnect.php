@@ -15,6 +15,9 @@ header("Access-Control-Allow-Credentials: true");
 // Unset all session variables
 $_SESSION = [];
 
+// Destroy the session
+session_destroy();
+
 // Clean tous les aspects du cookie et le détruit en le faisant se terminer dans le passé
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
@@ -29,7 +32,14 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// Destroy the session
-session_destroy();
+setcookie(
+    'JWT',
+    '',
+    time() - 42000,
+    $params["path"],
+    $params["domain"],
+    $params["secure"],
+    $params["httponly"]
+);
 
 echo 'disconnected';

@@ -1,4 +1,5 @@
 <?php
+use Firebase\JWT\JWT;
 session_start();
 
 require '../../databaseConnect.php';
@@ -20,6 +21,29 @@ if ($dbh) {
     $readAuth = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
 
     if (isset($readAuth) && !empty($readAuth)) {
+        // Add JWT
+        $secret_key = $_ENV['SECRET_KEY'];
+        $date = new DateTimeImmutable();
+        $expire_at = $date->modify('+6 minutes')->getTimestamp();
+        $domainName = "http://localhost:5173/";
+        $userEmail = $readAuth[0]['email'];
+        $payload = [
+            'iat' => $date->getTimestamp(),
+            'iss' => $domainName,
+            'nbf' => $date->getTimestamp(),
+            'exp' => $expire_at,
+            'userEmail' => $userEmail,
+        ];
+        $JWT = JWT::encode($payload, $secret_key, 'HS512');
+        setcookie("JWT", $JWT, [
+            'expires' => $expire_at,
+            'path' => '/',
+            'domain' => $domainName,
+            'secure' => false,
+            'httponly' => false,
+            'samesite' => 'Lax',
+        ]);
+        // Populate session
         $_SESSION['email'] = $readAuth[0]['email'];
         $_SESSION['cart'] = array();
         $_SESSION['cartTotalPrice'] = 0;
