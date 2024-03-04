@@ -3,6 +3,7 @@ import "./Nav.scss";
 import { useContext, useRef, useState } from "react";
 import { ProfileProductContext } from "../../contexts/profileProductContext";
 import PropTypes from "prop-types";
+import { UserContext } from "../../contexts/userContext";
 
 function Nav() {
     const [researchBody, setResearchBody] = useState("");
@@ -12,6 +13,7 @@ function Nav() {
     const searchRef = useRef();
 
     const { setProfileProduct } = useContext(ProfileProductContext);
+    const { user } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -22,7 +24,7 @@ function Nav() {
             formData.append('research', researchBody);
             formData.append('nbr_research', nbrResearch);
 
-            const response = await fetch('http://decitrephpbackend/src/searchRoutes/addSearch.php', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/searchRoutes/addSearch.php`, {
                 method: "POST",
                 headers: {
                     'Specificity': customHeader
@@ -42,7 +44,7 @@ function Nav() {
             setCustomHeader("");
             try {
                 const response = await fetch(
-                    `http://decitrephpbackend/src/productRoutes/getOneProduct.php?productId=${encodeURIComponent(searchArray[0].product_id)}`
+                    `${import.meta.env.VITE_BACKEND_URL}src/productRoutes/getOneProduct.php?productId=${encodeURIComponent(searchArray[0].product_id)}`
                 );
                 const product = await response.json();
                 setProfileProduct(product);
@@ -60,7 +62,7 @@ function Nav() {
     const handleSearch = async (e) => {
         try {
             const response = await fetch(
-                `http://decitrephpbackend/src/searchRoutes/autocomplete.php?search=${encodeURIComponent(e.target.value)}`
+                `${import.meta.env.VITE_BACKEND_URL}src/searchRoutes/autocomplete.php?search=${encodeURIComponent(e.target.value)}`
             );
             const search = await response.json();
             setSearchArray(search);
@@ -84,11 +86,11 @@ function Nav() {
     return (
         <nav className="nav__container">
             <Link to="/">
-                <img src="./public/logo.png" alt="Decitre, librairie en ligne, achat et vente de livres" />
+                <img src={`${import.meta.env.VITE_BACKEND_URL}/public/images/logo.png`} alt="Decitre, librairie en ligne, achat et vente de livres" />
             </Link>
             <span>
                 <form onSubmit={handleSearchUpdate}>
-                    <img src="./public/search.png" />
+                    <img src={`${import.meta.env.VITE_BACKEND_URL}/public/images/search.png`} />
                     <input
                         onChange={handleSearch}
                         list="searchList"
@@ -109,16 +111,17 @@ function Nav() {
                 <p>Accès à : <Link to="/">decitrepro.fr</Link></p>
             </span>
             <section className="nav__menus">
-                <Link to="/customer/account/login" className="nav__menus--links">
-                    <img src="./public/user.png" alt="Mon compte" />
+                <Link to={user[0]?.user_id ? '/customer/account/' : '/customer/account/login'} className="nav__menus--links">
+                    <img src={`${import.meta.env.VITE_BACKEND_URL}/public/images/user.png`} alt="Mon compte" />
                     <p>Mon&nbsp;compte</p>
                 </Link>
                 <Link to="/pages" className="nav__menus--links">
-                    <img src="./public/shops.png" alt="Nos librairies" />
+                    <img src={`${import.meta.env.VITE_BACKEND_URL}/public/images/shops.png`} alt="Nos librairies" />
                     <p>Nos&nbsp;librairies</p>
                 </Link>
                 <Link to="/checkout/cart" className="nav__menus--links">
-                    <img src="./public/cart.png" alt="Mon panier" />
+                    <p className="nav__notification">1</p>
+                    <img src={`${import.meta.env.VITE_BACKEND_URL}/public/images/cart.png`} alt="Mon panier" />
                     <p>Mon&nbsp;panier</p>
                 </Link>
             </section>

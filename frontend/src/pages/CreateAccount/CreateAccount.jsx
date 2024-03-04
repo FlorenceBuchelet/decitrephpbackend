@@ -24,7 +24,7 @@ function CreateAccount() {
             formData.append('password', passwordRef.current.value);
             console.log(formData);
 
-            const response = await fetch("http://decitrephpbackend/src/userRoutes/createUser.php", {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/createUser.php`, {
                 method: "POST",
                 body: formData,
             });

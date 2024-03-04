@@ -61,3 +61,14 @@
     }
 }
 
+.nav__notification {
+    color: white;
+    background-color: $dark_red;
+    border-radius: 50%;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}

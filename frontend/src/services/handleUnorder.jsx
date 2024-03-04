@@ -1,6 +1,6 @@
 const handleUnorder = async (productId) => {
     try {
-        await fetch(`http://decitrephpbackend/src/productRoutes/addToCart.php?productId=${productId}`, {
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}src/productRoutes/addToCart.php?productId=${productId}`, {
             credentials: 'include',
         });
     } catch (error) {

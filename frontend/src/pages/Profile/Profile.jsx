@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import "./Profile.scss";
+import { UserContext } from "../../contexts/userContext";
 
 function Profile() {
-    const [user, setUser] = useState([{}]);
+    const { user, setUser } = useContext(UserContext);
     const emailRef = useRef();
     // gender
     const firstnameRef = useRef("");
@@ -15,7 +16,7 @@ function Profile() {
 
         const currentUser = async () => {
             try {
-                const response = await fetch('http://decitrephpbackend/src/userRoutes/getOneUser.php', {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/getOneUser.php`, {
                     credentials: 'include'
                 });
                 const fetchedUser = await response.json();
@@ -46,7 +47,7 @@ function Profile() {
         formData.append('address', addressRef.current.value);
 
         try {
-            const response = await fetch(`http://decitrephpbackend/src/userRoutes/updateUser.php`,
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/updateUser.php`,
                 {
                     method: "POST",
                     body: formData

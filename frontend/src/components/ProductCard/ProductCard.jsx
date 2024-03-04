@@ -5,6 +5,7 @@ import { ProfileProductContext } from "../../contexts/profileProductContext";
 import PropTypes from "prop-types";
 import handleOrder from "../../services/handleOrder";
 
+
 function ProductCard({ id, ean, title, image, author, price, promo }) {
     const { setProfileProduct } = useContext(ProfileProductContext);
 
@@ -26,7 +27,13 @@ function ProductCard({ id, ean, title, image, author, price, promo }) {
                 <p className="productCard__author">{author}</p>
                 <p className="productCard__price">{price} €</p>
             </Link >
-            <button onClick={() => handleOrder(id)} type="button" className="productCard__order">Commander</button>
+            <button
+                onClick={() => handleOrder(id)}
+                type="button"
+                className="productCard__order"
+            >
+                Commander
+            </button>
         </article>
     );
 }

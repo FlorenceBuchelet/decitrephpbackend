@@ -17,3 +17,15 @@
 .productProfile__button {
     @include redButtons;
 }
+
+.productProfile__prices {
+    font-weight: bold;
+    &--old {
+        font-weight: normal;
+        font-size: small;
+
+    }
+    &--promo {
+        color: $dark-red;
+    }
+}

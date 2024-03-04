@@ -9,7 +9,7 @@ function App() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://decitrephpbackend/src/productRoutes/getAllProducts.php');
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/productRoutes/getAllProducts.php`);
       const products = await response.json();
       setProductsArray(products);
     } catch (error) {

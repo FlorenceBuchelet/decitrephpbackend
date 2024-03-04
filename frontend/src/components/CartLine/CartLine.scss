@@ -1,39 +1,39 @@
 @import '../../variables';
 
-.profileProduct__card {
+.cartLine__card {
     display: flex;
     gap: 10px;
     margin: 10px;
     margin-inline-start: 20px;
 }
 
-.profileProduct__img {
+.cartLine__img {
     height: 95px;
 }
 
-.profileProduct__card--content p {
+.cartLine__card--content p {
     margin-block-start: 10px;
     &:first-child {
         margin-block-start: 0;
     }
 }
 
-.profileProduct__title {
+.cartLine__title {
     font-weight: bold;
 }
 
-.profileProduct__author {
+.cartLine__author {
     font-size: 0.9rem;
     color: $dark-blue;
 }
 
-.profileProduct__price {
+.cartLine__price {
     font-weight: bold;
     color: $dark-red;
     font-size: 1.2rem;
 }
 
-.profileProduct__quantity {
+.cartLine__quantity {
     display: flex;
     gap: 4px;
     justify-content: center;
@@ -53,7 +53,7 @@
     }
 }
 
-.profileProduct__prices {
+.cartLine__prices {
     text-align: center;
     font-weight: bold;
     &--old {

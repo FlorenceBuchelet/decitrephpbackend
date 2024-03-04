@@ -1,13 +1,10 @@
-import { useContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import './Login.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserContext } from "../../contexts/userContext";
 
 
 function Login() {
     const [authError, setAuthError] = useState("");
-
-    const { setPhpsessid } = useContext(UserContext);
 
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -21,7 +18,7 @@ function Login() {
             formData.append('email', emailRef.current.value);
             formData.append('password', passwordRef.current.value);
 
-            const response = await fetch('http://decitrephpbackend/src/userRoutes/authentication.php', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/authentication.php`, {
                 method: "POST",
                 credentials: 'include',
                 body: formData,
@@ -32,7 +29,6 @@ function Login() {
                 if (message === 'No matching account') {
                     setAuthError("Votre email et/ou votre mot de passe ne correspondent pas.")
                 } else {
-               //     setPhpsessid(message);
                     navigate("/customer/account"); 
                 }
             }

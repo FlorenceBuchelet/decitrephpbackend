@@ -1,36 +1,50 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CartLine from "../../components/CartLine/CartLine";
 import "./Cart.scss";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/userContext";
 
 function Cart() {
     const navigate = useNavigate();
     const [cartContent, setCartContent] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
+    const { setUser } = useContext(UserContext);
 
     useEffect(() => {
         const getCart = async () => {
-
             try {
-                const response = await fetch('http://decitrephpbackend/src/productRoutes/getCart.php', {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/productRoutes/getCart.php`, {
                     credentials: 'include'
                 });
                 const cart = await response.json();
                 setCartContent(cart);
             } catch (error) {
-                console.error("Error while fetching user's data ", error);
+                console.error("Error while fetching user's data: ", error);
+            }
+        }
+        const getCartTotalPrice = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/productRoutes/getCartTotalPrice.php`, {
+                    credentials: 'include'
+                });
+                const cartTotalPrice = await response.json();
+                setTotalPrice(cartTotalPrice);
+            } catch (error) {
+                console.error("Error while fetching total: ", error);
             }
         }
         getCart();
+        getCartTotalPrice();
     }, [])
 
     const handleDisconnect = async () => {
         try {
-            const response = await fetch('http://decitrephpbackend/src/userRoutes/disconnect.php', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/disconnect.php`, {
                 credentials: 'include'
             });
             const textResponse = await response.text();
             if (textResponse === "disconnected") {
+                setUser([{}]);
                 navigate('/');
             }
         } catch (error) {
@@ -41,7 +55,7 @@ function Cart() {
     const handleEmptyCart = async () => {
         // ne fonctionne pas encore
 /*         try {
-            const response = await fetch('http://decitrephpbackend/src/userRoutes/disconnect.php', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/disconnect.php`, {
                 credentials: 'include'
             });
             const textResponse = await response.text();
@@ -102,8 +116,6 @@ function Cart() {
                                     price={product.product.price}
                                     promoPrice={product.product.promoPrice}
                                     quantity={product.quantity}
-                                    setTotalPrice={setTotalPrice}
-                                    totalPrice={totalPrice}
                                 /> 
                             )
                         })}

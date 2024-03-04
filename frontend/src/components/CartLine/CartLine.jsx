@@ -1,48 +1,53 @@
 import './CartLine.scss';
 import handleOrder from "../../services/handleOrder";
 import handleUnorder from "../../services/handleUnorder";
-import { useEffect, useState } from 'react';
 
+function CartLine({ productId, image, title, author, price, promoPrice, quantity }) {
 
-function CartLine({ productId, image, title, author, price, promoPrice, quantity, setTotalPrice, totalPrice }) {
-    const [lineQuantity, setLineQuantity] = useState(quantity);
-
-const handlePlus = () => {
-    handleOrder(productId);
-    setLineQuantity(lineQuantity +1);
+const handlePlus = async () => {
+    await handleOrder(productId);
+    window.location.reload();
 };
 
-const handleMinus = () => {
-    handleUnorder(productId);
-    setLineQuantity(lineQuantity - 1);
+const handleMinus = async () => {
+    await handleUnorder(productId);
+    window.location.reload();
 };
 
     return (
         <tr>
-            <td className='profileProduct__card'>
+            <td className='cartLine__card'>
                 <span>
-                    <img className='profileProduct__img' src={image ? image : ""} />
+                    <img className='cartLine__img' src={image ? image : ""} />
                 </span>
-                <span className='profileProduct__card--content'>
-                    <p className='profileProduct__title'>{title ? title : ""}</p>
-                    <p className='profileProduct__author'>{author ? author : ""}</p>
+                <span className='cartLine__card--content'>
+                    <p className='cartLine__title'>{title ? title : ""}</p>
+                    <p className='cartLine__author'>{author ? author : ""}</p>
+                    {promoPrice ?
+                    <>
+                        <p className='productCard__prices productCard__prices--old'><s>{`${price.toFixed(2)} €`}</s></p>
+                        <p className='productCard__prices productCard__prices--promo'>{`${promoPrice.toFixed(2)} €`}</p>
+                    </>
+                    :
+                    <p className='productCard__prices productCard__prices--current'>{`${price.toFixed(2)} €`}</p>
+                }
                 </span>
             </td>
             <td>
-                <span className='profileProduct__quantity'>
+                <span className='cartLine__quantity'>
                     <button onClick={handleMinus}>-</button>
-                    <input value={lineQuantity} onChange={() => {}} />
+                    <input defaultValue={quantity} />
                     <button onClick={handlePlus}>+</button>
                 </span>
             </td>
-            <td className='profileProduct__total'>
+            <td className='cartLine__total'>
                 {promoPrice ?
                     <>
-                        <p className='profileProduct__prices profileProduct__prices--old'><s>{`${price * lineQuantity} €`}</s></p>
-                        <p className='profileProduct__prices profileProduct__prices--promo'>{`${promoPrice * lineQuantity} €`}</p>
+                        <p className='cartLine__prices cartLine__prices--old'><s>{`${(price * quantity).toFixed(2)} €`}</s></p>
+                        <p className='cartLine__prices cartLine__prices--promo'>{`${(promoPrice * quantity).toFixed(2)} €`}</p>
                     </>
                     :
-                    <p className='profileProduct__prices profileProduct__prices--current'>{price ? `${price * lineQuantity} €` : ""}</p>
+                    <p className='cartLine__prices cartLine__prices--current'>{`${(price * quantity).toFixed(2)} €`}</p>
                 }
             </td>
         </tr>
