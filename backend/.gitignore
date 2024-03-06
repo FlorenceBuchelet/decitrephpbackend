@@ -1,3 +1,2 @@
-_connec.php
 .env
-/vendor
+vendor/
