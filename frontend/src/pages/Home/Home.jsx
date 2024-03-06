@@ -4,7 +4,7 @@ import { useOutletContext } from "react-router-dom";
 
 
 function Home() {
-    const [productsArray] = useOutletContext();
+    const {productsArray} = useOutletContext();
 
     return (
         <main className="home">

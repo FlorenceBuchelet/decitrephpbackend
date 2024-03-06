@@ -1,8 +1,10 @@
 <?php
-use Firebase\JWT\JWT;
-session_start();
 
 require '../../databaseConnect.php';
+require '../../JwtHandler.php';
+require "../userRoutes/sessionHandling.php";
+
+sessionHandling();
 
 $dbh = dbConnect();
 
@@ -22,31 +24,12 @@ if ($dbh) {
 
     if (isset($readAuth) && !empty($readAuth)) {
         // Add JWT
-        $secret_key = $_ENV['SECRET_KEY'];
-        $date = new DateTimeImmutable();
-        $expire_at = $date->modify('+6 minutes')->getTimestamp();
-        $domainName = "http://localhost:5173/";
-        $userEmail = $readAuth[0]['email'];
-        $payload = [
-            'iat' => $date->getTimestamp(),
-            'iss' => $domainName,
-            'nbf' => $date->getTimestamp(),
-            'exp' => $expire_at,
-            'userEmail' => $userEmail,
-        ];
-        $JWT = JWT::encode($payload, $secret_key, 'HS512');
-        setcookie("JWT", $JWT, [
-            'expires' => $expire_at,
-            'path' => '/',
-            'domain' => $domainName,
-            'secure' => false,
-            'httponly' => false,
-            'samesite' => 'Lax',
-        ]);
+        $jwt = new JwtHandler();
+        $payload = $readAuth[0]['email'];
+        $token = $jwt->encode("http://decitrephpbackend/backend/", $payload);
+        setcookie("JWT", $token);
         // Populate session
         $_SESSION['email'] = $readAuth[0]['email'];
-        $_SESSION['cart'] = array();
-        $_SESSION['cartTotalPrice'] = 0;
     } else {
         echo 'No matching account';
     }

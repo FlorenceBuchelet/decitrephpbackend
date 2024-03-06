@@ -5,7 +5,7 @@ import ProductProfile from "../../components/ProductProfile/ProductProfile";
 import { useOutletContext } from "react-router-dom";
 
 function Others() {
-    const [productsArray] = useOutletContext();
+    const {productsArray} = useOutletContext();
 
     return (
         <main className="home others">

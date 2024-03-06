@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Nav.scss";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ProfileProductContext } from "../../contexts/profileProductContext";
 import PropTypes from "prop-types";
 import { UserContext } from "../../contexts/userContext";
 
-function Nav() {
+function Nav({ notification, setNotification }) {
     const [researchBody, setResearchBody] = useState("");
     const [nbrResearch, setNbrResearch] = useState(1);
     const [customHeader, setCustomHeader] = useState("");
@@ -82,15 +82,30 @@ function Nav() {
         }
     }
 
+    useEffect(() => {
+        const getCartQty = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/productRoutes/getCartQty.php`, {
+                    credentials: 'include'
+                });
+                const currentQty = await response.text();
+                setNotification(currentQty);
+            } catch (error) {
+                console.error("Error in fetching cart qty: ", error)
+            }
+        }
+        getCartQty();
+    }, [])
+
 
     return (
         <nav className="nav__container">
             <Link to="/">
-                <img src={`${import.meta.env.VITE_BACKEND_URL}/public/images/logo.png`} alt="Decitre, librairie en ligne, achat et vente de livres" />
+                <img src={`${import.meta.env.VITE_BACKEND_URL}/Public/images/logo.png`} alt="Decitre, librairie en ligne, achat et vente de livres" />
             </Link>
             <span>
                 <form onSubmit={handleSearchUpdate}>
-                    <img src={`${import.meta.env.VITE_BACKEND_URL}/public/images/search.png`} />
+                    <img src={`${import.meta.env.VITE_BACKEND_URL}/Public/images/search.png`} />
                     <input
                         onChange={handleSearch}
                         list="searchList"
@@ -120,7 +135,7 @@ function Nav() {
                     <p>Nos&nbsp;librairies</p>
                 </Link>
                 <Link to="/checkout/cart" className="nav__menus--links">
-                    <p className="nav__notification">1</p>
+                    <p className="nav__notification">{notification}</p>
                     <img src={`${import.meta.env.VITE_BACKEND_URL}/public/images/cart.png`} alt="Mon panier" />
                     <p>Mon&nbsp;panier</p>
                 </Link>

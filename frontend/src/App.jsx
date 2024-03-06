@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [productsArray, setProductsArray] = useState([]);
+  const [notification, setNotification] = useState(0);
+
 
   const fetchProducts = async () => {
     try {
@@ -17,17 +19,31 @@ function App() {
     }
   };
 
+  const sessionStart = async () => {
+    try {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/sessionHandling.php`, {
+        credentials: 'include'
+      });
+    } catch (error) {
+      console.error('Error while creating session: ', error)
+    }
+  };
+
 
   useEffect(() => {
     fetchProducts();
+    sessionStart();
   }, []);
 
   return (
     <>
-      <Nav />
+      <Nav
+        notification={notification}
+        setNotification={setNotification}
+      />
       <SecondaryNav />
       <Outlet
-        context={[productsArray]}
+        context={{ productsArray, setNotification }}
       />
     </>
   )

@@ -1,16 +1,8 @@
 <?php
 
-// Continue la session de l'utilisateur logué
-if (isset($_COOKIE['PHPSESSID'])) {
-    session_id($_COOKIE['PHPSESSID']);
-    session_start();
-}
+require "../userRoutes/sessionHandling.php";
 
-$allowed_origin = 'http://localhost:5173';
-header("Access-Control-Allow-Origin: $allowed_origin");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Access-Control-Allow-Credentials: true");
+sessionHandling();
 
 // Unset all session variables
 $_SESSION = [];

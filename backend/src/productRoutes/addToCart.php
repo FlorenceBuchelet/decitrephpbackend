@@ -3,20 +3,16 @@
 require '../../databaseConnect.php';
 require_once '../class/Product.php';
 require_once '../factory/ProductFactory.php';
+require "../userRoutes/sessionHandling.php";
 
 use Products\Product;
 use Products\ProductFactory;
 
-if (isset($_COOKIE['PHPSESSID'])) {
-    session_id($_COOKIE['PHPSESSID']);
-    session_start();
-}
-
+sessionHandling();
 
 $dbh = dbConnect();
 
 if ($dbh) {
-    var_dump($_GET);
     $productId = isset($_GET['productId']) ? $_GET['productId'] : '';
     $quantity = isset($_GET['quantity']) ? $_GET['quantity'] : -1;
 
@@ -40,22 +36,18 @@ if ($dbh) {
 
     if (isset($_SESSION['cart'][$newProductId])) {
         $_SESSION['cart'][$newProductId]['quantity'] += $quantity;
-        $_SESSION['cartTotalPrice'] += ($readOneProduct['promo_price'] ? $readOneProduct['promo_price'] : $readOneProduct['price']) * $quantity;
     } else {
         $_SESSION['cart'][$newProductId] =
             [
                 'product' => $newProduct,
                 'quantity' => $quantity,
             ];
-            $_SESSION['cartTotalPrice'] += ($readOneProduct['promo_price'] ? $readOneProduct['promo_price'] : $readOneProduct['price']) * $quantity;
     }
 
     if ($_SESSION['cart'][$newProductId]['quantity'] === 0) {
         unset($_SESSION['cart'][$newProductId]);
     }
 
-    var_dump($_SESSION['cart']); // réponse front pour vérification
-    var_dump($_SESSION['cartTotalPrice']);
 } else {
     echo "Error during db connection.";
 }

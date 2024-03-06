@@ -22,14 +22,12 @@ function CreateAccount() {
             formData.append('firstname', firstnameRef.current.value);
             formData.append('lastname', lastnameRef.current.value);
             formData.append('password', passwordRef.current.value);
-            console.log(formData);
 
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/createUser.php`, {
                 method: "POST",
                 body: formData,
             });
             const message = await response.text();
-            console.log("message", message);
 
             if (message === "Email already in use") {
                 setErrorMessage("Cet email est déjà associé à un compte, vous allez être redirigé.")

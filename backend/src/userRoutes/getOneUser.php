@@ -1,56 +1,32 @@
 <?php
-use Firebase\JWT\Key;
-
-if (isset($_COOKIE['PHPSESSID'])) {
-    session_id($_COOKIE['PHPSESSID']);
-    session_start();
-}
 
 require '../../databaseConnect.php';
+require "../../JwtHandler.php";
+require "../userRoutes/sessionHandling.php";
 
-// var_dump($_COOKIE);
-/* 
-use Firebase\JWT\JWT;
+sessionHandling();
 
-// Fonction de validation du JWT
-function validateJWT($jwt)
-{
-    $secret_key = $_ENV['SECRET_KEY'];
-
-    try {
-        var_dump($jwt);
-        $decodedJWT = JWT::decode($jwt, new Key($secret_key, 'HS512'));
-        var_dump($decodedJWT);
-        return $decodedJWT;
-    } catch (Exception $e) {
-        // If the JWT is invalid
-        echo "Error: " . $e->getMessage();
-        return null;
-    }
-}
+$token = $_COOKIE['JWT'];
+$jwt = new JwtHandler();
+$data = $jwt->decode($token);
 
 
-if (isset($_COOKIE['JWT'])) {
-    $jwt = $_COOKIE['JWT'];
-    $decodedJWT = validateJWT($jwt);
+if ($data === $_SESSION['email']) {
+    $dbh = dbConnect();
 
-    if ($decodedJWT) { */
-        $dbh = dbConnect();
-        
-        if ($dbh) {
-            $email = $_SESSION['email'];
-            
-            $selectStatement = $dbh->prepare("SELECT * FROM user WHERE email = :email");
-            $selectStatement->bindParam(':email', $email);
-            $selectStatement->execute();
-            $readOneUser = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
-            echo json_encode($readOneUser);
-            
-        } else {
-            echo "Error during db connection.";
-        }
-/*         
+    if ($dbh) {
+        $email = $_SESSION['email'];
+
+        $selectStatement = $dbh->prepare("SELECT * FROM user WHERE email = :email");
+        $selectStatement->bindParam(':email', $email);
+        $selectStatement->execute();
+        $readOneUser = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
+        echo json_encode($readOneUser);
+
     } else {
-        echo "No valid token found.";
+        echo "Error during db connection.";
     }
-} */
+
+} else {
+    echo "No valid token found.";
+}

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import CartLine from "../../components/CartLine/CartLine";
 import "./Cart.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
 
 function Cart() {
@@ -9,6 +9,7 @@ function Cart() {
     const [cartContent, setCartContent] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
     const { setUser } = useContext(UserContext);
+    const { setNotification } = useOutletContext();
 
     useEffect(() => {
         const getCart = async () => {
@@ -45,26 +46,25 @@ function Cart() {
             const textResponse = await response.text();
             if (textResponse === "disconnected") {
                 setUser([{}]);
+                setNotification(0);
                 navigate('/');
             }
         } catch (error) {
-            console.error("Error: ", error)
+            console.error("Error in disconnection: ", error);
         }
     }
 
     const handleEmptyCart = async () => {
-        // ne fonctionne pas encore
-/*         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/disconnect.php`, {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/productRoutes/emptyCart.php`, {
                 credentials: 'include'
             });
-            const textResponse = await response.text();
-            if (textResponse === "disconnected") {
-                navigate('/');
-            }
+            const cart = await response.json();
+            setCartContent(cart);
         } catch (error) {
-            console.error("Error: ", error)
-        } */
+            console.error("Error while emptying the cart: ", error);
+        }
+        window.location.reload();
     }
 
     return (
@@ -81,8 +81,8 @@ function Cart() {
                 <span>Confirmation</span>
             </p>
             <span className="cart__headerButtons">
-            <button onClick={handleEmptyCart} className="cart__emptyCart">Vider le panier</button>
-            <button onClick={handleDisconnect} className="cart__disconnect">Déconnexion</button>
+                <button onClick={handleEmptyCart} className="cart__emptyCart">Vider le panier</button>
+                <button onClick={handleDisconnect} className="cart__disconnect">Déconnexion</button>
             </span>
             {Object.keys(cartContent).length > 0 ? <>
                 <span className="cart__tableHeader cart__tableHeader--top">
@@ -116,7 +116,7 @@ function Cart() {
                                     price={product.product.price}
                                     promoPrice={product.product.promoPrice}
                                     quantity={product.quantity}
-                                /> 
+                                />
                             )
                         })}
                     </tbody>
