@@ -21,6 +21,7 @@ Platform is an online bookshop so it needs to have:
 Technically, this means I got to learn PHP through OOP, session handling, API basics, database and cookies handling. I also learnt PHP's syntax and subtilities.
 
 ![image](https://github.com/FlorenceBuchelet/decitrephpbackend/assets/144147299/3f58c06f-b171-4d47-b9a3-ee404e504cc4)
+![image](https://github.com/FlorenceBuchelet/decitrephpbackend/assets/144147299/f6afc173-5927-418d-b8bc-7809beed5505)
 
 ## React + Vite
 
