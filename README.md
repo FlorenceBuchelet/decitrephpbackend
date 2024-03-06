@@ -5,18 +5,18 @@ During my first internship as a web developer, I worked for the biggest french o
 ## Challenges
 
 Platform is an online bookshop so it needs to have:
+- A full database including user, product and cart management
 - A homepage with bestsellers products
 - A search bar with autocomplete based on how often a search is made
 - Product profiles
-- Product database
-- An authentification page
-- User database
+- An authentication page protected with a JWT
 - User needs to be able to edit their informations
 - User needs to be able to create an account
 - User needs to be able to add products to their cart
 - User can disconnect from the platform at will
-- The cart quantities can be updated in cart
+- The cart quantities can be updated in cart and products can be removed from cart
 - Total in cart is calculated dynamically
+- A notification in the navbar to display how many products are in cart
 
 Technically, this means I got to learn PHP through OOP, session handling, API basics, database and cookies handling. I also learnt PHP's syntax and subtilities.
 
