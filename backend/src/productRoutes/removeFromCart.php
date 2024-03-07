@@ -1,7 +1,7 @@
 <?php
 
-require '../../databaseConnect.php';
-require "../userRoutes/sessionHandling.php";
+require '../services/databaseConnect.php';
+require "../services/sessionHandling.php";
 
 sessionHandling();
 

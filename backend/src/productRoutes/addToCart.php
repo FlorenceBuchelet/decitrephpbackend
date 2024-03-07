@@ -1,9 +1,9 @@
 <?php
 
-require '../../databaseConnect.php';
+require '../services/databaseConnect.php';
 require_once '../class/Product.php';
 require_once '../factory/ProductFactory.php';
-require "../userRoutes/sessionHandling.php";
+require "../services/sessionHandling.php";
 
 use Products\Product;
 use Products\ProductFactory;
@@ -28,7 +28,8 @@ if ($dbh) {
             $readOneProduct['image'],
             $readOneProduct['author'],
             $readOneProduct['price'],
-            $readOneProduct['promo_price']
+            $readOneProduct['promo_price'],
+            $readOneProduct['category_id'],
         );
         $addToCartTotalPrice = $readOneProduct['promo_price'] || $readOneProduct['price'];
     }

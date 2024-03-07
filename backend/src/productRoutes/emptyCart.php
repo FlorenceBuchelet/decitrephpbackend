@@ -1,6 +1,6 @@
 <?php
 
-require '../userRoutes/sessionHandling.php';
+require '../services/sessionHandling.php';
 
 sessionHandling();
 

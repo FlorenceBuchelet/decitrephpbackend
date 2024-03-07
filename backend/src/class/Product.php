@@ -11,6 +11,8 @@ class Product implements \JsonSerializable
     private string $author;
     private float $price;
     private ?float $promoPrice;
+    private int $categoryId;
+    private int $quantity;
 
     public function getProductId(): int
     {
@@ -74,6 +76,22 @@ class Product implements \JsonSerializable
     {
         $this->promoPrice = $promoPrice;
     }
+    public function getCategoryId(): int
+    {
+        return $this->categoryId;
+    }
+    public function setCategoryId(int $categoryId): void
+    {
+        $this->categoryId = $categoryId;
+    }
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+    public function setQuantity(int $quantity): void
+    {
+        $this->quantity = $quantity;
+    }
     public function jsonSerialize(): array
     {
         return [
@@ -84,6 +102,7 @@ class Product implements \JsonSerializable
             'author' => $this->author,
             'price' => $this->price,
             'promoPrice' => $this->promoPrice,
+            'categoryId' => $this->categoryId,
         ];
     }
 }

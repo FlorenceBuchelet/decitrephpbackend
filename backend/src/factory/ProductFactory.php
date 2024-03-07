@@ -14,7 +14,8 @@ class ProductFactory
         string $image,
         string $author,
         float $price,
-        ?float $promoPrice
+        ?float $promoPrice,
+        int $categoryId,
     ): Product {
         $product = new Product();
         $product->setProductId($productId);
@@ -24,7 +25,7 @@ class ProductFactory
         $product->setAuthor($author);
         $product->setPrice($price);
         $product->setPromoPrice($promoPrice);
-
+        $product->setCategoryId($categoryId);
         return $product;
     }
 }

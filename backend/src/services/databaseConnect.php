@@ -1,9 +1,9 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/');
+$dotenv = Dotenv\Dotenv::createImmutable('../../');
 $dotenv->load();
 
 $allowed_origin = 'http://localhost:5173';

@@ -1,7 +1,7 @@
 <?php
 
 require_once '../class/Product.php';
-require "../userRoutes/sessionHandling.php";
+require "../services/sessionHandling.php";
 
 sessionHandling();
 

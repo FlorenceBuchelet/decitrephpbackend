@@ -1,8 +1,8 @@
 <?php
 
-require '../../databaseConnect.php';
-require "../../JwtHandler.php";
-require "../userRoutes/sessionHandling.php";
+require '../services/databaseConnect.php';
+require "../services/JwtHandler.php";
+require "../services/sessionHandling.php";
 
 sessionHandling();
 

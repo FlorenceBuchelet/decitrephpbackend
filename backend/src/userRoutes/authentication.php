@@ -1,8 +1,8 @@
 <?php
 
-require '../../databaseConnect.php';
-require '../../JwtHandler.php';
-require "../userRoutes/sessionHandling.php";
+require '../services/databaseConnect.php';
+require '../services/JwtHandler.php';
+require "../services/userRoutes/sessionHandling.php";
 
 sessionHandling();
 
@@ -27,7 +27,9 @@ if ($dbh) {
         $jwt = new JwtHandler();
         $payload = $readAuth[0]['email'];
         $token = $jwt->encode("http://decitrephpbackend/backend/", $payload);
-        setcookie("JWT", $token);
+        setcookie("JWT", $token, [
+            'SameSite' => 'Lax',
+        ]);
         // Populate session
         $_SESSION['email'] = $readAuth[0]['email'];
     } else {

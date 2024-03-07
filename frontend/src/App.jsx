@@ -21,7 +21,7 @@ function App() {
 
   const sessionStart = async () => {
     try {
-      await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/sessionHandling.php`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/sessionStart.php`, {
         credentials: 'include'
       });
     } catch (error) {
