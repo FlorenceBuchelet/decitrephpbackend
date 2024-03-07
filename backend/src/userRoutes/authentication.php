@@ -2,7 +2,7 @@
 
 require '../services/databaseConnect.php';
 require '../services/JwtHandler.php';
-require "../services/userRoutes/sessionHandling.php";
+require "../services/sessionHandling.php";
 
 sessionHandling();
 
@@ -27,11 +27,10 @@ if ($dbh) {
         $jwt = new JwtHandler();
         $payload = $readAuth[0]['email'];
         $token = $jwt->encode("http://decitrephpbackend/backend/", $payload);
-        setcookie("JWT", $token, [
-            'SameSite' => 'Lax',
-        ]);
+        setcookie("JWT", $token);
         // Populate session
         $_SESSION['email'] = $readAuth[0]['email'];
+        var_dump($_SESSION);
     } else {
         echo 'No matching account';
     }

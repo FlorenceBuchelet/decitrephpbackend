@@ -4,8 +4,17 @@ namespace Products;
 
 class CartContent
 {
+    private int $cartContentId;
     private int $cartId;
     private int $productId;
+    public function getCartContentId(): int
+    {
+        return $this->cartContentId;
+    }
+    public function setCartContentId(int $cartContentId): void
+    {
+        $this->cartContentId = $cartContentId;
+    }
 
     public function getCartId(): int
     {
