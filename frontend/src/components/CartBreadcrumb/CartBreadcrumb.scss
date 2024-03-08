@@ -1,0 +1,20 @@
+@import "../../variables";
+
+.cart__breadcrumb {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    margin-block: 20px;
+    & .cart, .identification, .delivery, .payment, .confirmation {
+        color: $font-color;
+    }
+    & span {
+        font-weight: bold;
+        color: rgb(159, 159, 159);
+    }
+    &--links:hover {
+        text-decoration: underline;
+    }
+}
+

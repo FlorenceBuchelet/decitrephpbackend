@@ -2,33 +2,32 @@
 
 namespace Products;
 
-class Address
+class OrderAddress
 {
-    private int $cartAddressId;
-    private string $cartFullname;
+    private int $orderAddressId;
+    private string $orderFullname;
     private string $address;
     private ?string $addressDetails;
     private string $city;
     private string $region;
     private string $country;
     private ?string $phone;
-    private int $cartId;
 
-    public function getCartAddressId(): int
+    public function getOrderAddressId(): int
     {
-        return $this->cartAddressId;
+        return $this->orderAddressId;
     }
-    public function setCartAddressId(int $cartAddressId): void
+    public function setOrderAddressId(int $orderAddressId): void
     {
-        $this->cartAddressId = $cartAddressId;
+        $this->orderAddressId = $orderAddressId;
     }
-    public function getCartFullname(): string
+    public function getOrderFullname(): string
     {
-        return $this->cartFullname;
+        return $this->orderFullname;
     }
-    public function setCartFullname(string $cartFullname): void
+    public function setOrderFullname(string $orderFullname): void
     {
-        $this->cartFullname = $cartFullname;
+        $this->orderFullname = $orderFullname;
     }
     public function getAddress(): string
     {
@@ -82,14 +81,5 @@ class Address
     public function setPhone(?string $phone): void
     {
         $this->phone = $phone;
-    }
-
-    public function getCartId(): int
-    {
-        return $this->cartId;
-    }
-    public function setCartId(int $cartId): void
-    {
-        $this->cartId = $cartId;
     }
 }

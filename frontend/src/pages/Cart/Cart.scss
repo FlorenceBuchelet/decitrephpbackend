@@ -1,19 +1,5 @@
 @import '../../variables';
 
-.cart__breadcrumb {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    margin-block: 20px;
-    & span {
-        font-weight: bold;
-        color: rgb(159, 159, 159);
-        &:first-child {
-            color: $font-color;
-        }
-    }
-}
-
 .cart__headerButtons {
     display: flex;
     justify-content: space-between;
@@ -72,13 +58,7 @@
 }
 
 .cart__button--back {
-    @include redButtons;
-    padding: 7px;
-    background-color: #DDDDDD;
-    color: $font-color;
-    padding-inline: 10px;
-    font-size: 0.9rem;
-    
+    @include greyButtons;
 }
 
 .cart__button--validation {
@@ -94,6 +74,7 @@
         border-bottom: 1px solid $font-color;
         margin: auto;
         margin-top: 20px;
+        padding-bottom: 10px;
     }
     &--list {
         width: 90%;

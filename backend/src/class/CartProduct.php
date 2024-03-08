@@ -2,7 +2,7 @@
 
 namespace Products;
 
-class Product implements \JsonSerializable
+class CartProduct implements \JsonSerializable
 {
     private int $productId;
     private int $ean;
@@ -11,6 +11,7 @@ class Product implements \JsonSerializable
     private string $image;
     private float $price;
     private int $categoryId;
+    private int $cartId;
 
     public function getProductId(): int
     {
@@ -73,6 +74,14 @@ class Product implements \JsonSerializable
     public function setCategoryId(int $categoryId): void
     {
         $this->categoryId = $categoryId;
+    }
+    public function getCartId(): int
+    {
+        return $this->cartId;
+    }
+    public function setCartId(int $cartId): void
+    {
+        $this->cartId = $cartId;
     }
     public function jsonSerialize(): array
     {

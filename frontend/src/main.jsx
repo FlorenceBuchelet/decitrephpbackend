@@ -10,6 +10,10 @@ import Cart from './pages/Cart/Cart.jsx';
 import CreateAccount from './pages/CreateAccount/CreateAccount.jsx';
 import { UserProvider } from './contexts/userContext.jsx';
 import Profile from './pages/Profile/Profile.jsx';
+import Confirm from './pages/Checkout/Confirmation/Confirm.jsx';
+import Delivery from './pages/Checkout/Delivery/Delivery.jsx';
+import Identification from './pages/Checkout/Identification/Identification.jsx';
+import Payment from './pages/Checkout/Payment/Payment.jsx';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +42,22 @@ const router = createBrowserRouter([
       {
         path: "/checkout/cart",
         element: <Cart />,
+      },
+      {
+        path: "/checkout/identification",
+        element: <Identification />,
+      },
+      {
+        path: "/checkout/delivery",
+        element: <Delivery />,
+      },
+      {
+        path: "/checkout/confirmation",
+        element: <Confirm />,
+      },
+      {
+        path: "/checkout/payment",
+        element: <Payment />,
       },
     ],
   },

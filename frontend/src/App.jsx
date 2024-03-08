@@ -43,7 +43,7 @@ function App() {
       />
       <SecondaryNav />
       <Outlet
-        context={{ productsArray, setNotification }}
+        context={{ productsArray, notification, setNotification }}
       />
     </>
   )

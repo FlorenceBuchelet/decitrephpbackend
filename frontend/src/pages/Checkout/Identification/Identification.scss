@@ -1,0 +1,79 @@
+@import "../../../variables";
+
+.identification__cart  {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    padding: 1rem;
+    padding-bottom: 10px;
+    border: 1px dashed;
+    border-color: transparent transparent rgb(207, 207, 207) transparent;
+    margin-bottom: 10px;
+}
+
+.identification__estimate {
+    font-weight: bold;
+    padding-bottom: 5px;
+    &--edit {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        & button {
+            @include greyButtons;
+        }
+    }
+}
+.identification__green {
+    color: green;
+}
+
+.identification__lines {
+    display: flex;
+    flex-direction: column;
+    border: 1px dashed;
+    border-color: transparent transparent rgb(183, 183, 183) transparent;
+    padding-block: 10px;
+    width: 80%;
+    margin: auto;
+}
+
+.identification__secondLine {
+    display: flex;
+    justify-content: space-between;
+}
+
+.identification__author {
+    font-size: x-small;
+    color: gray;
+}
+
+.identification__price {
+    font-size: small;
+    font-weight: bold;
+}
+
+.identification__totalPrice {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    background-color: rgb(209, 209, 209);
+    padding: 1rem;
+    & p {
+        display: flex;
+        justify-content: space-between;
+    }
+    &--secondLine * {
+        font-size: 2rem
+    }
+    &--secondLine :last-child {
+        color: $dark-red;
+    }
+}
+
+.identification__button--next {
+    @include redButtons;
+    margin-top: 25px;
+    margin-inline-start: 80%;
+}

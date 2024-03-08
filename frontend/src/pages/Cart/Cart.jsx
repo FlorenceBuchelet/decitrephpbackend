@@ -3,12 +3,13 @@ import CartLine from "../../components/CartLine/CartLine";
 import "./Cart.scss";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
+import CartBreadcrumb from "../../components/CartBreadcrumb/CartBreadcrumb";
 
 function Cart() {
     const navigate = useNavigate();
     const [cartContent, setCartContent] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
-    const { setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const { setNotification } = useOutletContext();
 
     useEffect(() => {
@@ -67,19 +68,16 @@ function Cart() {
         window.location.reload();
     }
 
+    const handleValidate = () => {
+        user[0].user_id
+        ? navigate('/checkout/identification')
+        : navigate("/customer/account/login");
+    }
+
     return (
         <main className="cart">
-            <p className="cart__breadcrumb">
-                <span>Mon panier</span>
-                <span>&gt;</span>
-                <span>Identification</span>
-                <span>&gt;</span>
-                <span>Livraison</span>
-                <span>&gt;</span>
-                <span>Paiement</span>
-                <span>&gt;</span>
-                <span>Confirmation</span>
-            </p>
+            <CartBreadcrumb
+                classname={"cart"} />
             <span className="cart__headerButtons">
                 <button onClick={handleEmptyCart} className="cart__emptyCart">Vider le panier</button>
                 <button onClick={handleDisconnect} className="cart__disconnect">Déconnexion</button>
@@ -92,7 +90,7 @@ function Cart() {
                     <span>
                         <p>Total :</p>
                         <p className="cart__total">{totalPrice} €</p>
-                        <button type="button" className="cart__button--validation">Valider mon panier &gt;</button>
+                        <button type="button" onClick={handleValidate} className="cart__button--validation">Valider mon panier &gt;</button>
                     </span>
                 </span>
                 <table>
@@ -128,7 +126,7 @@ function Cart() {
                     <span>
                         <p>Total :</p>
                         <p className="cart__total">{totalPrice} €</p>
-                        <button className="cart__button--validation">Valider mon panier &gt;</button>
+                        <button type="button" onClick={handleValidate} className="cart__button--validation">Valider mon panier &gt;</button>
                     </span>
                 </span>
             </> :

@@ -9,6 +9,7 @@ class Order
     private int $cartId;
     private string $orderRef;
     private float $orderTotal;
+    private int $orderAddressId;
 
     public function getOrderId(): int
     {
@@ -49,5 +50,13 @@ class Order
     public function setOrderTotal(float $orderTotal): void
     {
         $this->orderTotal = $orderTotal;
+    }
+    public function getOrderAddressId(): int
+    {
+        return $this->orderAddressId;
+    }
+    public function setOrderAddressId(int $orderAddressId): void
+    {
+        $this->orderAddressId = $orderAddressId;
     }
 }

@@ -30,10 +30,37 @@ if ($dbh) {
             $readOneProduct['price'],
             $readOneProduct['promo_price'],
             $readOneProduct['category_id'],
+            $readOneProduct['quantity'],
         );
         $addToCartTotalPrice = $readOneProduct['promo_price'] || $readOneProduct['price'];
     }
     $newProductId = $newProduct->getProductId();
+
+    // Insert new product in cart_product
+    $insertStatement = $dbh->prepare(
+        "INSERT INTO cart_product (ean, title, author, image, price, category_id, cart_id) 
+        VALUES (:ean, :title, :author, :image, :price, :categoryId, :cartId);"
+    );
+    $newProductEan = $newProduct->getEan();
+    $newProductTitle = $newProduct->getTitle();
+    $newProductAuthor = $newProduct->getAuthor();
+    $newProductImage = $newProduct->getImage();
+    $newProductPrice = $newProduct->getPrice();
+    $newProductPromoPrice = $newProduct->getPromoPrice();
+    $newProductCategoryId = $newProduct->getCategoryId();
+
+    $insertStatement->bindParam(':ean', $newProductEan);
+    $insertStatement->bindParam(':title', $newProductTitle);
+    $insertStatement->bindParam(':author', $newProductAuthor);
+    $insertStatement->bindParam(':image', $newProductImage);
+    if (!empty($newProductPromoPrice)) {
+        $insertStatement->bindParam(':price', $newProductPromoPrice);
+    } else {
+        $insertStatement->bindParam(':price', $newProductPrice);
+    }
+    $insertStatement->bindParam(':categoryId', $newProduct);
+    $insertStatement->bindParam(':cartId', $_SESSION['cart_id']);
+    $insertStatement->execute();
 
     if (isset($_SESSION['cart'][$newProductId])) {
         $_SESSION['cart'][$newProductId]['quantity'] += $quantity;
@@ -48,6 +75,8 @@ if ($dbh) {
     if ($_SESSION['cart'][$newProductId]['quantity'] === 0) {
         unset($_SESSION['cart'][$newProductId]);
     }
+
+    var_dump($_SESSION);
 
 } else {
     echo "Error during db connection.";

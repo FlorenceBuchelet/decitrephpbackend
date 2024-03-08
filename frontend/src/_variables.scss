@@ -13,8 +13,20 @@ $font-color: #333333;
     padding-inline: 30px;
     border-radius: 5px;
     text-align: center;
+    font-size: 0.9rem;
     &:hover {
         background-color: rgb(209, 14, 14);
+    }
+}
+
+@mixin greyButtons {
+    @include redButtons;
+    background-color: #d3d3d3;
+    color: $font-color;
+    padding: 5px;
+    padding-inline: 15px;
+    &:hover {
+        background-color: #dcdcdc;
     }
 }
 

@@ -2,11 +2,11 @@
 
 namespace Products;
 
-use Products\Product;
+use Products\CartProduct;
 
-class ProductFactory
+class CartProductFactory
 {
-    public static function createProductFromDatabase(
+    public static function createCartProductFromDatabase(
         int $productId,
         int $ean,
         string $title,
@@ -14,15 +14,17 @@ class ProductFactory
         string $image,
         float $price,
         int $categoryId,
-    ): Product {
-        $product = new Product();
-        $product->setProductId($productId);
-        $product->setEan($ean);
-        $product->setTitle($title);
-        $product->setImage($image);
-        $product->setAuthor($author);
-        $product->setPrice($price);
-        $product->setCategoryId($categoryId);
-        return $product;
+        int $cartId,
+    ): CartProduct {
+        $cartProduct = new CartProduct();
+        $cartProduct->setProductId($productId);
+        $cartProduct->setEan($ean);
+        $cartProduct->setTitle($title);
+        $cartProduct->setImage($image);
+        $cartProduct->setAuthor($author);
+        $cartProduct->setPrice($price);
+        $cartProduct->setCategoryId($categoryId);
+        $cartProduct->setCartId($cartId);
+        return $cartProduct;
     }
 }

@@ -17,14 +17,14 @@ function CartLine({ productId, image, title, author, price, promoPrice, quantity
         try {
             await fetch(
                 `${import.meta.env.VITE_BACKEND_URL}src/productRoutes/removeFromCart.php?productId=${encodeURIComponent(productId)}`, {
-                    credentials: 'include'
-                }
+                credentials: 'include'
+            }
             );
         } catch (error) {
             console.error("Error in removing item: ", error);
         }
         window.location.reload();
-        };
+    };
 
     return (
         <tr>

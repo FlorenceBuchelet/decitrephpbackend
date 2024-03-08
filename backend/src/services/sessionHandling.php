@@ -1,5 +1,6 @@
 <?php
 
+
 // CORS
 $allowed_origin = 'http://localhost:5173';
 header("Access-Control-Allow-Origin: $allowed_origin");
