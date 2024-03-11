@@ -6,5 +6,6 @@ require '../services/sessionHandling.php';
 
 sessionHandling();
 
+
 // Send the cart to frontend
 echo json_encode($_SESSION['cart']);

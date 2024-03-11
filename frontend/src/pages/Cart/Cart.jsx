@@ -20,6 +20,7 @@ function Cart() {
                 });
                 const cart = await response.json();
                 setCartContent(cart);
+                console.log("cart", cart);
             } catch (error) {
                 console.error("Error while fetching user's data: ", error);
             }

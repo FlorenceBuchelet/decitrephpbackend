@@ -12,7 +12,7 @@ function cartHandling()
             $selectStatement = $dbh->prepare("SELECT cart_id FROM cart WHERE cart_id = LAST_INSERT_ID();");
             $selectStatement->execute();
             $readCartId = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
-            echo json_encode($readCartId);
+            $_SESSION["cart_id"] = $readCartId[0];
         }
     } else {
         echo "Error during db connection.";

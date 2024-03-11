@@ -10,6 +10,7 @@ class CartProduct implements \JsonSerializable
     private string $author;
     private string $image;
     private float $price;
+    private ?float $promoPrice;
     private int $categoryId;
     private int $cartId;
 
@@ -58,6 +59,7 @@ class CartProduct implements \JsonSerializable
         $this->author = $author;
     }
 
+    
     public function getPrice(): float
     {
         return $this->price;
@@ -66,7 +68,15 @@ class CartProduct implements \JsonSerializable
     {
         $this->price = $price;
     }
-
+    
+    public function getPromoPrice(): ?float
+    {
+        return $this->promoPrice;
+    }
+    public function setPromoPrice(?float $promoPrice): void
+    {
+        $this->promoPrice = $promoPrice;
+    }
     public function getCategoryId(): int
     {
         return $this->categoryId;
@@ -89,10 +99,12 @@ class CartProduct implements \JsonSerializable
             'productId' => $this->productId,
             'ean' => $this->ean,
             'title' => $this->title,
-            'image' => $this->image,
             'author' => $this->author,
+            'image' => $this->image,
             'price' => $this->price,
+            'promoPrice' => $this->promoPrice,
             'categoryId' => $this->categoryId,
+            'cartId'=> $this->cartId,
         ];
     }
 }

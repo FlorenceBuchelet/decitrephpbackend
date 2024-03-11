@@ -4,15 +4,14 @@ namespace Products;
 
 use Products\Product;
 
-// Factory : faire une fonction dans une classe pour concentrer les sources de données 
 class ProductFactory
 {
     public static function createProductFromDatabase(
         int $productId,
         int $ean,
         string $title,
-        string $image,
         string $author,
+        string $image,
         float $price,
         ?float $promoPrice,
         int $categoryId,
@@ -22,8 +21,8 @@ class ProductFactory
         $product->setProductId($productId);
         $product->setEan($ean);
         $product->setTitle($title);
-        $product->setImage($image);
         $product->setAuthor($author);
+        $product->setImage($image);
         $product->setPrice($price);
         $product->setPromoPrice($promoPrice);
         $product->setCategoryId($categoryId);

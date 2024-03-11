@@ -7,8 +7,8 @@ class Product implements \JsonSerializable
     private int $productId;
     private int $ean;
     private string $title;
-    private string $image;
     private string $author;
+    private string $image;
     private float $price;
     private ?float $promoPrice;
     private int $categoryId;
@@ -98,11 +98,12 @@ class Product implements \JsonSerializable
             'productId' => $this->productId,
             'ean' => $this->ean,
             'title' => $this->title,
-            'image' => $this->image,
             'author' => $this->author,
+            'image' => $this->image,
             'price' => $this->price,
             'promoPrice' => $this->promoPrice,
             'categoryId' => $this->categoryId,
+            'quantity' => $this->quantity,
         ];
     }
 }
