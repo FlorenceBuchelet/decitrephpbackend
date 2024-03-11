@@ -20,7 +20,6 @@ function Cart() {
                 });
                 const cart = await response.json();
                 setCartContent(cart);
-                console.log("cart", cart);
             } catch (error) {
                 console.error("Error while fetching user's data: ", error);
             }
@@ -103,21 +102,18 @@ function Cart() {
                         </tr>
                     </thead>
                     <tbody>
-                        {Object.keys(cartContent).map(key => {
-                            const product = cartContent[key];
-                            return (
+                        {cartContent.map((product) => (
                                 <CartLine
-                                    key={product.product.productId}
-                                    productId={product.product.productId}
-                                    image={product.product.image}
-                                    title={product.product.title}
-                                    author={product.product.author}
-                                    price={product.product.price}
-                                    promoPrice={product.product.promoPrice}
+                                    key={product.cart_product_id}
+                                    productId={product.product_id}
+                                    image={product.image}
+                                    title={product.title}
+                                    author={product.author}
+                                    price={product.price}
+                                    promoPrice={product.promo_price}
                                     quantity={product.quantity}
                                 />
-                            )
-                        })}
+                        ))}
                     </tbody>
                 </table>
                 <span className="cart__tableHeader">

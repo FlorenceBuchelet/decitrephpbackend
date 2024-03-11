@@ -51,23 +51,20 @@ function Identification() {
                 </span>
             </span>
             {/* Cartline */}
-            {Object.keys(cartContent).map(key => {
-                const product = cartContent[key];
-                const line = product.product;
-                return (
+            {cartContent.map((product) => (
+                <CheckoutLine />
                     <span className="identification__lines"
-                        key={line.productId}>
-                        <p className="identification__title">{line.title}</p>
+                        key={product.cart_product_id}>
+                        <p className="identification__title">{product.title}</p>
                         <p className="identification__secondLine"><span className="identification__author">
-                            {line.author}
+                            {product.author}
                         </span>
-                            <span className="identification__price">{line.promoPrice
-                                ? (line.promoPrice * product.quantity).toFixed(2)
-                                : (line.price * product.quantity).toFixed(2)} €</span>
+                            <span className="identification__price">{product.promo_price
+                                ? (product.promo_price * product.quantity).toFixed(2)
+                                : (product.price * product.quantity).toFixed(2)} €</span>
                         </p>
                     </span>
-                )
-            })}
+            ))}
             <span className="identification__totalPrice">
                 <p className="identification__totalPrice--firstLine"><span>Frais de livraison : </span><span className="identification__price">0,00 €</span></p>
                 <p className="identification__totalPrice--secondLine"><span>Total : </span><span className="identification__price">{totalPrice} €</span></p>

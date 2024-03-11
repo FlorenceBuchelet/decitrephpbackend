@@ -1,20 +1,31 @@
 <?php
 
-require_once '../class/Product.php';
-require "../services/sessionHandling.php";
+require '../services/databaseConnect.php';
+require_once '../class/CartProduct.php';
+require_once '../factory/CartProductFactory.php';
+require '../services/sessionHandling.php';
 
 sessionHandling();
 
-$totalPrice = 0;
-$cart = $_SESSION['cart'];
+$dbh = dbConnect();
 
-foreach ($cart as $item) {
-    (float)$promoPrice = $item['product']->getPromoPrice();
-    (float)$price = $item['product']->getPrice();
-    $promoPrice
-        ? $totalPrice += (float)$promoPrice * (int)$item['quantity']
-        : $totalPrice += (float)$price * (int)$item['quantity'];
-};
+if ($dbh) {
+    // fetch le cart en fonction du cart_id
+    $selectStatement = $dbh->prepare("SELECT
+    SUM(CASE
+        WHEN cart_product.promo_price IS NOT NULL THEN cart_product.promo_price
+        ELSE cart_product.price
+    END) AS total
+FROM
+    cart_product
+WHERE
+    cart_product.cart_id = :cartId;
+");
+    $selectStatement->bindParam(':cartId', $_SESSION['cart_id']['cart_id']);
+    $selectStatement->execute();
+    $readTotal = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
+    echo json_encode(number_format($readTotal[0]['total'], 2, ',', ' '));
+} else {
+    echo "Error during db connection.";
+}
 
-// Send the cart to frontend
-echo json_encode(number_format($totalPrice, 2, ',', ' '));

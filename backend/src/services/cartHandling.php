@@ -13,6 +13,7 @@ function cartHandling()
             $selectStatement->execute();
             $readCartId = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
             $_SESSION["cart_id"] = $readCartId[0];
+            var_dump($_SESSION);
         }
     } else {
         echo "Error during db connection.";

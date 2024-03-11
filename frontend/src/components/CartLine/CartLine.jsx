@@ -6,7 +6,6 @@ function CartLine({ productId, image, title, author, price, promoPrice, quantity
 
     const handlePlus = () => {
         handleOrder(productId);
-
     };
 
     const handleMinus = () => {

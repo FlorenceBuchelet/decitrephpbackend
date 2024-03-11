@@ -13,7 +13,7 @@ if ($dbh) {
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
     $selectStatement = $dbh->prepare(
-        "SELECT user.email, authentication.password FROM user
+        "SELECT user.email, user.user_id, authentication.password FROM user
         JOIN authentication ON user.user_id = authentication.user_id
         WHERE user.email = :email AND authentication.password = :password;"
     );
@@ -30,6 +30,15 @@ if ($dbh) {
         setcookie("JWT", $token);
         // Populate session
         $_SESSION['email'] = $readAuth[0]['email'];
+        $_SESSION['user_id'] = $readAuth[0]['user_id'];
+
+        // Associate cart_id and user_id in database
+        $insertStatement = $dbh->prepare(
+            "UPDATE cart SET user_id = :userId WHERE cart_id = :cartId"
+        );
+        $insertStatement->bindParam(':userId', $readAuth[0]['user_id']);
+        $insertStatement->bindParam(':cartId', $_SESSION['cart_id']['cart_id']);
+        $insertStatement->execute();
         var_dump($_SESSION);
     } else {
         echo 'No matching account';
