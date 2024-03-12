@@ -1,2 +1,48 @@
 @import "../../../variables";
 
+.delivery__main {
+    width: 90%;
+    margin: auto;
+    padding-block: 2%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+
+}
+
+.delivery__addressCard {
+    width: 20%;
+    min-width: 300px;
+    background-color: $light-grey;
+    border: 2px solid $grey;
+    padding: 1rem;
+    &:hover {
+        background-color: rgb(224, 224, 224);
+        cursor: pointer;
+    }
+    & span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid $grey;
+        padding: 10px;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: xx-large;
+        background-color: $grey;
+        color: $white;
+    }
+    &--new {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        border: 2px dashed $grey;
+        background-color: transparent;
+        & p {
+            color: $grey;
+        }
+    }
+}

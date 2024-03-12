@@ -6,6 +6,7 @@ export const UserContext = createContext();
 export function UserProvider({ children }) {
     const [user, setUser] = useState([{}]);
     const authUser = useMemo(() => ({ user, setUser }), [user, setUser]);
+    console.log(user);
 
     return <UserContext.Provider value={authUser}>{children}</UserContext.Provider>;
 }

@@ -39,7 +39,7 @@ if ($dbh) {
         $insertStatement->bindParam(':userId', $readAuth[0]['user_id']);
         $insertStatement->bindParam(':cartId', $_SESSION['cart_id']['cart_id']);
         $insertStatement->execute();
-        var_dump($_SESSION);
+        echo 'Redirect to cart';
     } else {
         echo 'No matching account';
     }

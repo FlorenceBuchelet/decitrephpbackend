@@ -169,9 +169,35 @@ SELECT * FROM cart;
 SELECT cart_id FROM cart WHERE cart_id = LAST_INSERT_ID();
 SELECT * FROM cart_product;
 
+SELECT * FROM cart_product WHERE cart_id = 31;
+
 SELECT * FROM user
 JOIN address
 JOIN authentication
 WHERE user.user_id = 1;
 
 SELECT * FROM product WHERE product_id = 1;
+
+SELECT cart_product.*, product.product_id, COUNT(*) AS quantity
+    FROM cart_product 
+    JOIN product on cart_product.ean = product.ean
+    JOIN cart ON cart_product.cart_id = cart.cart_id
+    WHERE cart.cart_id = 19
+    GROUP BY cart_product.ean;
+
+SELECT cart_product.cart_product_id
+    FROM cart_product 
+    JOIN cart ON cart_product.cart_id = cart.cart_id
+    WHERE cart_product.ean = '9782070454837' AND cart.cart_id = 29;
+    
+    DELETE cart_product.* FROM cart_product WHERE cart_product_id = 36;
+    
+SELECT
+    SUM(CASE
+        WHEN cart_product.promo_price IS NOT NULL THEN cart_product.promo_price
+        ELSE cart_product.price
+    END) AS total
+FROM
+    cart_product
+WHERE
+    cart_product.cart_id = 31;

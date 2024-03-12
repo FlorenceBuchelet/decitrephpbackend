@@ -14,13 +14,13 @@ if ($data === $_SESSION['email']) {
     $dbh = dbConnect();
 
     if ($dbh) {
-        $email = $_SESSION['email'];
+        $userId = $_SESSION['user_id'];
 
-        $selectStatement = $dbh->prepare("SELECT * FROM user JOIN address WHERE email = :email");
-        $selectStatement->bindParam(':email', $email);
+        $selectStatement = $dbh->prepare("SELECT * FROM address WHERE user_id = :userId");
+        $selectStatement->bindParam(':userId', $userId);
         $selectStatement->execute();
-        $readOneUser = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
-        echo json_encode($readOneUser);
+        $readOneUserAddresses = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
+        echo json_encode($readOneUserAddresses);
 
     } else {
         echo "Error during db connection.";

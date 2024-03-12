@@ -26,6 +26,7 @@ function CreateAccount() {
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/createUser.php`, {
                 method: "POST",
                 body: formData,
+                credentials: 'include',
             });
             const message = await response.text();
 

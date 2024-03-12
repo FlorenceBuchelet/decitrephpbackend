@@ -128,7 +128,7 @@ function Nav({ notification, setNotification }) {
             <section className="nav__menus">
                 <Link to={user[0]?.user_id ? '/customer/account/' : '/customer/account/login'} className="nav__menus--links">
                     <img src={`${import.meta.env.VITE_BACKEND_URL}/public/images/user.png`} alt="Mon compte" />
-                    <p>Mon&nbsp;compte</p>
+                    {user[0]?.user_id ? <p>Bonjour&nbsp;{user[0]?.firstname}</p> : <p>Mon&nbsp;compte</p>}
                 </Link>
                 <Link to="/pages" className="nav__menus--links">
                     <img src={`${import.meta.env.VITE_BACKEND_URL}/public/images/shops.png`} alt="Nos librairies" />

@@ -1,10 +1,12 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import './Login.scss';
 import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../contexts/userContext';
 
 
 function Login() {
     const [authError, setAuthError] = useState("");
+    const { setUser } = useContext(UserContext);
 
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -29,7 +31,16 @@ function Login() {
                 if (message === 'No matching account') {
                     setAuthError("Votre email et/ou votre mot de passe ne correspondent pas.")
                 } else {
-                    navigate("/customer/account"); 
+                    try {
+                        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/getOneUser.php`, {
+                            credentials: 'include'
+                        });
+                        const fetchedUser = await response.json();
+                        setUser(fetchedUser);
+                        navigate("/checkout/cart"); 
+                    } catch (error) {
+                        console.error("Error while fetching user: ", error)
+                    }
                 }
             }
         } catch (error) {

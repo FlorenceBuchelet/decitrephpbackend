@@ -7,7 +7,7 @@ import CartBreadcrumb from "../../components/CartBreadcrumb/CartBreadcrumb";
 
 function Cart() {
     const navigate = useNavigate();
-    const [cartContent, setCartContent] = useState({});
+    const [cartContent, setCartContent] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const { user, setUser } = useContext(UserContext);
     const { setNotification } = useOutletContext();

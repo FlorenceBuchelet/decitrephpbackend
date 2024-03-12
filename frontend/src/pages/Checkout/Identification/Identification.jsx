@@ -4,7 +4,7 @@ import "./Identification.scss";
 import { useEffect, useState } from "react";
 
 function Identification() {
-    const [cartContent, setCartContent] = useState({});
+    const [cartContent, setCartContent] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const { notification } = useOutletContext();
 
@@ -52,7 +52,6 @@ function Identification() {
             </span>
             {/* Cartline */}
             {cartContent.map((product) => (
-                <CheckoutLine />
                     <span className="identification__lines"
                         key={product.cart_product_id}>
                         <p className="identification__title">{product.title}</p>

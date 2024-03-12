@@ -5,4 +5,8 @@ require '../services/sessionHandling.php';
 sessionHandling();
 
 // Send the total to frontend
-echo json_encode($_SESSION['cart']['quantity']);
+if (!isset($_SESSION['cart']['quantity'])) {
+    echo '0';
+} else {
+    echo $_SESSION['cart']['quantity'];
+}
