@@ -2,25 +2,25 @@
 
 namespace Products;
 
-use Products\Order;
+use Products\Command;
 
-class OrderFactory
+class CommandFactory
 {
-    public static function createOrderFromDatabase(
-        int $orderId,
+    public static function createCommandFromDatabase(
+        int $commandId,
         int $userId,
         int $cartId,
-        string $orderRef,
-        float $orderTotal,
-        int $orderAddressId,
-    ): Order {
-        $order = new Order();
-        $order->setOrderId($orderId);
-        $order->setUserId($userId);
-        $order->setCartId($cartId);
-        $order->setOrderRef($orderRef);
-        $order->setOrderTotal($orderTotal);
-        $order->setOrderAddressId($orderAddressId);
-        return $order;
+        string $commandRef,
+        float $commandTotal,
+        int $commandAddressId,
+    ): Command {
+        $command = new Command();
+        $command->setCommandId($commandId);
+        $command->setUserId($userId);
+        $command->setCartId($cartId);
+        $command->setCommandRef($commandRef);
+        $command->setCommandTotal($commandTotal);
+        $command->setCommandAddressId($commandAddressId);
+        return $command;
     }
 }

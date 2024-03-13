@@ -1,0 +1,39 @@
+@import "../../../variables";
+
+.newAddress {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+    gap: 1rem;
+    padding: 1rem;
+    & span {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+    & input {
+        width: 80%;
+        padding: 3px;
+        border: 1px solid $grey;
+        border-radius: 3px;
+    }
+}
+
+.delivery__input--text {
+    justify-content: end;
+    align-items: end;
+}
+
+.newAddress__spans {
+    justify-content: space-between;
+    display: flex;
+    text-align: end;
+}
+
+.newAddress__button {
+    @include greyButtons;
+    width: fit-content;
+    margin: auto;
+    margin-top: 2rem;
+}

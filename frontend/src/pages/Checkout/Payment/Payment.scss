@@ -1,2 +1,33 @@
 @import "../../../variables";
 
+.payment__payzen {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    & p {
+        margin-block: 1rem;
+    }
+    & img {
+        max-width: 237px;
+    }
+}
+
+.payment__main {
+    display: flex;
+    justify-content: end;
+    width: 90%;
+    margin: auto;
+    padding-block-start: 1rem;
+}
+
+.payment__button {
+    @include redButtons;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    & img {
+        height: 1rem;
+    }
+}

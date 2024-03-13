@@ -1,1 +1,26 @@
 @import "../../../variables";
+
+.confirm {
+    width: 90%;
+    margin: auto;
+}
+
+.confirm__title {
+    color: $dark-red;
+    padding-block-end: 10px;
+    border: 1px solid;
+    border-color: transparent transparent black transparent;
+}
+
+.confirm__p {
+    margin-block: 10px;
+}
+
+.confirm__stars {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 2rem;
+    & img {
+        cursor: pointer;
+    }
+}

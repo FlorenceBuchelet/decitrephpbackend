@@ -16,7 +16,9 @@ if ($data === $_SESSION['email']) {
     if ($dbh) {
         $email = $_SESSION['email'];
 
-        $selectStatement = $dbh->prepare("SELECT * FROM user JOIN address WHERE email = :email");
+        $selectStatement = $dbh->prepare("SELECT address.*, user.* FROM user 
+            LEFT JOIN address ON user.user_id = address.user_id 
+            WHERE user.email = :email");
         $selectStatement->bindParam(':email', $email);
         $selectStatement->execute();
         $readOneUser = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);

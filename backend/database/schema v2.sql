@@ -49,7 +49,10 @@ CREATE TABLE `authentication` (
 );
 
 CREATE TABLE `address` (
-  `user_id` INT PRIMARY KEY NOT NULL,
+  `address_id`INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `address_label` VARCHAR(50),
+  `address_fullname` VARCHAR(255) NOT NULL,
   `address` VARCHAR(255) NOT NULL,
   `address_details` VARCHAR(255),
   `city` VARCHAR(255),
@@ -87,27 +90,26 @@ CREATE TABLE `cart_product` (
     REFERENCES `decitrephpbackend_v2`.`cart` (`cart_id`)
 );
 
-CREATE TABLE `order` (
-  `order_id` INT PRIMARY KEY NOT NULL,
+CREATE TABLE `command` (
+  `command_id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `user_id` INT NOT NULL,
   `cart_id` INT NOT NULL,
-  `order_ref` VARCHAR(45) NOT NULL,
-  `order_total` FLOAT NOT NULL,
-  `order_address_id` INT,
+  `command_total` FLOAT NOT NULL,
+  `command_address_id` INT NOT NULL,
   CONSTRAINT `user_id`
     FOREIGN KEY (`user_id`)
     REFERENCES `decitrephpbackend_v2`.`user` (`user_id`),
   CONSTRAINT `cart_id`
     FOREIGN KEY (`cart_id`)
     REFERENCES `decitrephpbackend_v2`.`cart` (`cart_id`),
-      CONSTRAINT `order_address_id`
-    FOREIGN KEY (`order_address_id`)
-    REFERENCES `decitrephpbackend_v2`.`order_address` (`order_address_id`)
+      CONSTRAINT `command_address_id`
+    FOREIGN KEY (`command_address_id`)
+    REFERENCES `decitrephpbackend_v2`.`command_address` (`command_address_id`)
 );
 
-CREATE TABLE `order_address` (
-  `order_address_id` INT PRIMARY KEY NOT NULL,
-  `order_fullname` VARCHAR(255),
+CREATE TABLE `command_address` (
+  `command_address_id` INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  `command_fullname` VARCHAR(255),
   `address` VARCHAR(255) NOT NULL,
   `address_details` VARCHAR(255),
   `city` VARCHAR(255),
@@ -156,12 +158,18 @@ INSERT INTO user (gender, firstname, lastname, email) VALUES
 INSERT INTO authentication (password, user_id) VALUES
 ('azerty', 1);
 
-INSERT INTO address (user_id, address, address_details, city, region, country, phone) VALUES
-(1, "191 rue des Cinq Voies", NULL, "Lille", "Hauts-de-France", "France", NULL);
+INSERT INTO address (user_id, address_label, address_fullname, address, address_details, city, region, country, phone) VALUES
+(1, "travail", "Mme Buchelet Florence", "191 rue des Cinq Voies", NULL, "Lille", "Hauts-de-France", "France", NULL),
+(1, "maison", "Mme Buchelet Florence", "12 rue de la Rue", "appt chaussette", "Street City", "Région bas trois Belgique chaussette lorem ipsum d'un autre niveau", "Canada", NULL);
 
 ------------------------------------------------------------------------
-
+/*
 USE decitrephpbackend_v2; 
+
+INSERT INTO command (user_id, cart_id, command_total, command_address_id)
+VALUES (1, 1, 1, 1);
+
+SELECT * FROM command;
 
 INSERT INTO cart VALUES ();
 
@@ -201,3 +209,8 @@ FROM
     cart_product
 WHERE
     cart_product.cart_id = 31;
+
+SELECT address.*, user.* FROM user LEFT JOIN address ON user.user_id = address.user_id  WHERE user.email = "mail@mail.mail";
+
+SELECT * FROM user WHERE email = "mail@mail.mail";
+SELECT * FROM address WHERE user_id = 2;

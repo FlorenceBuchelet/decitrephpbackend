@@ -2,29 +2,29 @@
 
 namespace Products;
 
-use Products\OrderAddress;
+use Products\CommandAddress;
 
-class OrderAddressFactory
+class CommandAddressFactory
 {
-    public static function createOrderAddressFromDatabase(
-        int $orderAddressId,
-        string $orderFullname,
+    public static function createCommandAddressFromDatabase(
+        int $commandAddressId,
+        string $commandFullname,
         string $address,
         ?string $addressDetails,
         string $city,
         string $region,
         string $country,
         ?string $phone,
-    ): OrderAddress {
-        $orderAddress = new OrderAddress();
-        $orderAddress->setOrderAddressId($orderAddressId);
-        $orderAddress->setOrderFullname($orderFullname);
-        $orderAddress->setAddress($address);
-        $orderAddress->setAddressDetails($addressDetails);
-        $orderAddress->setCity($city);
-        $orderAddress->setRegion($region);
-        $orderAddress->setCountry($country);
-        $orderAddress->setPhone($phone);
-        return $orderAddress;
+    ): CommandAddress {
+        $commandAddress = new CommandAddress();
+        $commandAddress->setCommandAddressId($commandAddressId);
+        $commandAddress->setCommandFullname($commandFullname);
+        $commandAddress->setAddress($address);
+        $commandAddress->setAddressDetails($addressDetails);
+        $commandAddress->setCity($city);
+        $commandAddress->setRegion($region);
+        $commandAddress->setCountry($country);
+        $commandAddress->setPhone($phone);
+        return $commandAddress;
     }
 }

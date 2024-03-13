@@ -29,7 +29,7 @@ function Delivery() {
             formData.append('user_id', id);
             formData.append('address_label', label);
 
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/createOrder.php`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/userRoutes/createCommand.php`, {
                 method: "POST",
                 body: formData,
                 credentials: 'include'
@@ -37,15 +37,12 @@ function Delivery() {
 
             const message = await response.text();
 
-            if (message === "order created") {
-                navigate("/chekcout/payment");
+            if (message === "Nouvelle commande créée.") {
+                navigate("/checkout/payment");
             }
         } catch (error) {
-            console.error("Error in order creation: ", error);
+            console.error("Error in command creation: ", error);
         }
-        // création de l'order_address et de l'order
-        // association du user, du cart et de l'order_address dans order
-
     }
 
     return (
@@ -71,7 +68,9 @@ function Delivery() {
                         <p>{address.phone}</p>
                     </article>
                 ))}
-                <article className='delivery__addressCard delivery__addressCard--new'>
+                <article onClick={() =>
+                    navigate('/checkout/newaddress')}
+                    className='delivery__addressCard delivery__addressCard--new'>
                     <span>+</span>
                     <p>Ajouter une nouvelle adresse.</p>
                 </article>

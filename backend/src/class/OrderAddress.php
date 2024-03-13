@@ -2,10 +2,10 @@
 
 namespace Products;
 
-class OrderAddress
+class CommandAddress
 {
-    private int $orderAddressId;
-    private string $orderFullname;
+    private int $commandAddressId;
+    private string $commandFullname;
     private string $address;
     private ?string $addressDetails;
     private string $city;
@@ -13,21 +13,21 @@ class OrderAddress
     private string $country;
     private ?string $phone;
 
-    public function getOrderAddressId(): int
+    public function getCommandAddressId(): int
     {
-        return $this->orderAddressId;
+        return $this->commandAddressId;
     }
-    public function setOrderAddressId(int $orderAddressId): void
+    public function setCommandAddressId(int $commandAddressId): void
     {
-        $this->orderAddressId = $orderAddressId;
+        $this->commandAddressId = $commandAddressId;
     }
-    public function getOrderFullname(): string
+    public function getCommandFullname(): string
     {
-        return $this->orderFullname;
+        return $this->commandFullname;
     }
-    public function setOrderFullname(string $orderFullname): void
+    public function setCommandFullname(string $commandFullname): void
     {
-        $this->orderFullname = $orderFullname;
+        $this->commandFullname = $commandFullname;
     }
     public function getAddress(): string
     {

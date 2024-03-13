@@ -12,6 +12,7 @@ import { UserProvider } from './contexts/userContext.jsx';
 import Profile from './pages/Profile/Profile.jsx';
 import Confirm from './pages/Checkout/Confirmation/Confirm.jsx';
 import Delivery from './pages/Checkout/Delivery/Delivery.jsx';
+import NewAddress from './pages/Checkout/NewAddress/NewAddress.jsx';
 import Identification from './pages/Checkout/Identification/Identification.jsx';
 import Payment from './pages/Checkout/Payment/Payment.jsx';
 
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/checkout/delivery",
         element: <Delivery />,
+      },
+      {
+        path: "/checkout/newaddress",
+        element: <NewAddress />,
       },
       {
         path: "/checkout/confirmation",

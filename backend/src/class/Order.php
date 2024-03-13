@@ -2,22 +2,22 @@
 
 namespace Products;
 
-class Order
+class Command
 {
-    private int $orderId;
+    private int $commandId;
     private int $userId;
     private int $cartId;
-    private string $orderRef;
-    private float $orderTotal;
-    private int $orderAddressId;
+    private string $commandRef;
+    private float $commandTotal;
+    private int $commandAddressId;
 
-    public function getOrderId(): int
+    public function getCommandId(): int
     {
-        return $this->orderId;
+        return $this->commandId;
     }
-    public function setOrderId(int $orderId): void
+    public function setCommandId(int $commandId): void
     {
-        $this->orderId = $orderId;
+        $this->commandId = $commandId;
     }
     public function getUserId(): int
     {
@@ -35,28 +35,28 @@ class Order
     {
         $this->cartId = $cartId;
     }
-    public function getOrderRef(): string
+    public function getCommandRef(): string
     {
-        return $this->orderRef;
+        return $this->commandRef;
     }
-    public function setOrderRef(string $orderRef): void
+    public function setCommandRef(string $commandRef): void
     {
-        $this->orderRef = $orderRef;
+        $this->commandRef = $commandRef;
     }
-    public function getOrderTotal(): float
+    public function getCommandTotal(): float
     {
-        return $this->orderTotal;
+        return $this->commandTotal;
     }
-    public function setOrderTotal(float $orderTotal): void
+    public function setCommandTotal(float $commandTotal): void
     {
-        $this->orderTotal = $orderTotal;
+        $this->commandTotal = $commandTotal;
     }
-    public function getOrderAddressId(): int
+    public function getCommandAddressId(): int
     {
-        return $this->orderAddressId;
+        return $this->commandAddressId;
     }
-    public function setOrderAddressId(int $orderAddressId): void
+    public function setCommandAddressId(int $commandAddressId): void
     {
-        $this->orderAddressId = $orderAddressId;
+        $this->commandAddressId = $commandAddressId;
     }
 }
