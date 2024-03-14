@@ -26,6 +26,7 @@ function Nav({ notification, setNotification }) {
 
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/searchRoutes/addSearch.php`, {
                 method: "POST",
+                credentials: 'include',
                 headers: {
                     'Specificity': customHeader
                 },
@@ -44,7 +45,9 @@ function Nav({ notification, setNotification }) {
             setCustomHeader("");
             try {
                 const response = await fetch(
-                    `${import.meta.env.VITE_BACKEND_URL}src/productRoutes/getOneProduct.php?productId=${encodeURIComponent(searchArray[0].product_id)}`
+                    `${import.meta.env.VITE_BACKEND_URL}src/productRoutes/getOneProduct.php?productId=${encodeURIComponent(searchArray[0].product_id)}`, {
+                        credentials: 'include'
+                    }
                 );
                 const product = await response.json();
                 setProfileProduct(product);
@@ -62,7 +65,9 @@ function Nav({ notification, setNotification }) {
     const handleSearch = async (e) => {
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_BACKEND_URL}src/searchRoutes/autocomplete.php?search=${encodeURIComponent(e.target.value)}`
+                `${import.meta.env.VITE_BACKEND_URL}src/searchRoutes/autocomplete.php?search=${encodeURIComponent(e.target.value)}`, {
+                    credentials: 'include'
+                }
             );
             const search = await response.json();
             setSearchArray(search);
@@ -117,8 +122,8 @@ function Nav({ notification, setNotification }) {
                             <option
                                 className="nav__searchList--options"
                                 key={search.research_id}
-                                value={`${search.research}`}
-                            >{search.research}</option>
+                                value={`${search.research_value}`}
+                            >{search.research_value}</option>
                         ))}
                     </datalist>
                     <button type="submit">OK</button>

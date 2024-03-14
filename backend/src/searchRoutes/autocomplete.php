@@ -9,7 +9,7 @@ if ($dbh) {
     $userSearch = isset($_GET['search']) ? $_GET['search'] : '';
 
     $selectStatement = $dbh->prepare(
-        "SELECT * FROM research WHERE research LIKE CONCAT('%', :userSearch, '%') ORDER BY nbr_research DESC;"
+        "SELECT * FROM research WHERE research_value LIKE CONCAT('%', :userSearch, '%') ORDER BY nbr_research DESC;"
     );
     $selectStatement->bindParam(':userSearch', $userSearch);
     // Exécute la requête préparée

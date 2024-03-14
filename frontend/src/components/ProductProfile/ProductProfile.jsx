@@ -8,7 +8,7 @@ function ProductProfile() {
 
     return (
         <>
-            {profileProduct[0].id ?
+            {profileProduct[0].product_id ?
                 <article className="productProfile">
                     <aside className="productProfile__cover">
                         <img src={profileProduct[0].image} />
@@ -16,19 +16,19 @@ function ProductProfile() {
                     <aside className="productProfile__content">
                         <h2>{profileProduct[0].title}</h2> {/* <p>- {type}</p> */}
                         <h3>{profileProduct[0].author}</h3>
-                        {/* <p>Note moyenne {note} */}
+                        <p>Quantité en stock : {profileProduct[0].quantity}</p>
                         {/* <p>{summary}</p> */}
-                        {profileProduct[0].promo ?
+                        {profileProduct[0].promo_price ?
                             <>
                                 <p className='productProfile__prices productProfile__prices--old'><s>{`${profileProduct[0].price} €`}</s></p>
-                                <p className='productProfile__prices productProfile__prices--promo'>{`${profileProduct[0].promo} €`}</p>
+                                <p className='productProfile__prices productProfile__prices--promo'>{`${profileProduct[0].promo_price} €`}</p>
                             </>
                             :
                             <p className='productProfile__prices productProfile__prices--current'>{`${profileProduct[0].price} €`}</p>
                         }
                         <p>EAN : {profileProduct[0].ean}</p>
                         <button
-                            onClick={() => handleOrder(profileProduct[0].id)}
+                            onClick={() => handleOrder(profileProduct[0].product_id)}
                             className="productProfile__button"
                             type="button"
                         >
