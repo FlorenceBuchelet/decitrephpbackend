@@ -166,6 +166,13 @@ INSERT INTO address (user_id, address_label, address_fullname, address, address_
 /*
 USE decitrephpbackend_v2; 
 
+SELECT command.command_id, user.email
+        FROM user
+        JOIN command ON user.user_id = command.user_id
+        WHERE command.user_id = 2
+        ORDER BY command.command_id DESC;
+
+
 INSERT INTO command (user_id, cart_id, command_total, command_address_id)
 VALUES (1, 1, 10.2, 1);
 
