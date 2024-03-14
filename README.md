@@ -33,6 +33,9 @@ Database in SQL using MySQL and PhpMyAdmin (Schema can be found in backend>datab
 
 env.sample are available in back and front.
 
+![image](https://github.com/FlorenceBuchelet/decitrephpbackend/assets/144147299/7a5dac9b-c25f-40ef-badf-2b7c84d55e31)
+
+
 ## React + Vite Template
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
