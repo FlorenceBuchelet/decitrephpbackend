@@ -6,17 +6,7 @@ function Payment() {
     const navigate = useNavigate();
 
     const handleClick = async () => {
-/*         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}src/productRoutes/emptyCart.php`, {
-                credentials: 'include'
-            });
-            if (response.ok) { */
-                navigate('/checkout/confirmation');
-/*             }
-        } catch (error) {
-            console.error("Error during payment.")
-        }
-        window.location.reload(); */
+        navigate('/checkout/confirmation');
     }
 
     return (
