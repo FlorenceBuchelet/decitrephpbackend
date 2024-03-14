@@ -1,6 +1,10 @@
 <?php
 
 require '../services/databaseConnect.php';
+require_once '../factory/ProductFactory.php';
+require_once "../class/Product.php";
+
+use Products\ProductFactory;
 
 $dbh = dbConnect();
 
@@ -15,6 +19,21 @@ if ($dbh) {
     // Récupère les résultats sous forme de tableau associatif
     $readOneProduct = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
     echo json_encode($readOneProduct);
+
+    // POO inutile pour s'entrainer 
+    if ($readOneProduct) {
+        $newProduct = ProductFactory::createProductFromDatabase(
+            $readOneProduct['product_id'],
+            $readOneProduct['ean'],
+            $readOneProduct['title'],
+            $readOneProduct['author'],
+            $readOneProduct['image'],
+            $readOneProduct['price'],
+            $readOneProduct['promo_price'],
+            $readOneProduct['category_id'],
+            $readOneProduct['$quantity'],
+        );
+    }
 } else {
     echo "Error during db connection.";
 }
