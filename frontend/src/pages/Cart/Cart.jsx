@@ -68,7 +68,15 @@ function Cart() {
         window.location.reload();
     }
 
-    const handleValidate = () => {
+    const handleValidate = async () => {
+        try {
+            await fetch('', {
+                credentials: 'include'
+            })
+
+        } catch (error) {
+            console.error("Error in cart validation: ", error);
+        }
         user[0].user_id
         ? navigate('/checkout/identification')
         : navigate("/customer/account/login");

@@ -167,7 +167,7 @@ INSERT INTO address (user_id, address_label, address_fullname, address, address_
 USE decitrephpbackend_v2; 
 
 INSERT INTO command (user_id, cart_id, command_total, command_address_id)
-VALUES (1, 1, 1, 1);
+VALUES (1, 1, 10.2, 1);
 
 SELECT * FROM command;
 

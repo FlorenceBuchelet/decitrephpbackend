@@ -32,16 +32,17 @@ if ($dbh) {
         $insertStatement->execute();
     }
 
-    // 3 Crée la command et update la command avec toutes les infos (INSERT ?)
+    // 3 Crée la command et insert la command avec toutes les infos
     if ($insertStatement->rowCount() > 0) {
         // Insertion réussie
-        $lastInsertId = $dbh->lastInsertId();
+        (int) $lastInsertId = $dbh->lastInsertId();
+        (float) $cartTotal = $_SESSION['cart_total'];
 
         $insertStatement = $dbh->prepare('INSERT INTO command (user_id, cart_id, command_total, command_address_id)
             VALUES (:userId, :cartId, :commandTotal, :commandAddressId);');
         $insertStatement->bindParam(':userId', $_SESSION['user_id']);
         $insertStatement->bindParam(':cartId', $_SESSION['cart_id']['cart_id']);
-        $insertStatement->bindParam(':commandTotal', $_SESSION['cart_total'], \PDO::PARAM_STR);
+        $insertStatement->bindParam(':commandTotal', $cartTotal, \PDO::PARAM_STR);
         $insertStatement->bindParam(':commandAddressId', $lastInsertId);
         $insertStatement->execute();
         // 4 Retourner confirmation

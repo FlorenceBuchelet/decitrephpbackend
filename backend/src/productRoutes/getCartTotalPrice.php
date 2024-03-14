@@ -24,7 +24,7 @@ if ($dbh) {
     $selectStatement->execute();
     $readTotal = $selectStatement->fetchAll(\PDO::FETCH_ASSOC);
 
-    $_SESSION['cart_total'] = number_format($readTotal[0]['total'], 2, ',', ' ');
+    (float) $_SESSION['cart_total'] = number_format($readTotal[0]['total'], 2, ',', ' ');
 
     echo json_encode(number_format($readTotal[0]['total'], 2, ',', ' '));
 } else {

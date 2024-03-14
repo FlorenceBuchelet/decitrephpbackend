@@ -1,10 +1,11 @@
 <?php
 
-require '../services/databaseConnect.php';
 require '../services/JwtHandler.php';
 require "../services/sessionHandling.php";
+require "../services/cartHandling.php";
 
 sessionHandling();
+cartHandling();
 
 $dbh = dbConnect();
 
