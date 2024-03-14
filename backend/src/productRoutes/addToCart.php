@@ -5,7 +5,6 @@ require_once '../factory/CartProductFactory.php';
 require "../services/sessionHandling.php";
 require "../services/cartHandling.php";
 
-use Products\CartProduct;
 use Products\CartProductFactory;
 
 sessionHandling();
@@ -38,13 +37,21 @@ if ($dbh) {
                 "INSERT INTO cart_product (ean, title, author, image, price, promo_price, category_id, cart_id) 
             VALUES (:ean, :title, :author, :image, :price, :promoPrice, :categoryId, :cartId);"
             );
-            $insertStatement->bindParam(':ean', $readOneProduct['ean']);
-            $insertStatement->bindParam(':title', $readOneProduct['title']);
-            $insertStatement->bindParam(':author', $readOneProduct['author']);
-            $insertStatement->bindParam(':image', $readOneProduct['image']);
-            $insertStatement->bindParam(':promoPrice', $readOneProduct['promo_price']);
-            $insertStatement->bindParam(':price', $readOneProduct['price']);
-            $insertStatement->bindParam(':categoryId', $readOneProduct['category_id']);
+            $newProductEan = $newProduct->getEan();
+            $newProductTitle = $newProduct->getTitle();
+            $newProductAuthor = $newProduct->getAuthor();
+            $newProductImage = $newProduct->getImage();
+            $newProductPromoPrice = $newProduct->getPromoPrice();
+            $newProductPrice = $newProduct->getPrice();
+            $newProductCategoryId = $newProduct->getCategoryId();
+
+            $insertStatement->bindParam(':ean', $newProductEan);
+            $insertStatement->bindParam(':title', $newProductTitle);
+            $insertStatement->bindParam(':author', $newProductAuthor);
+            $insertStatement->bindParam(':image', $newProductImage);
+            $insertStatement->bindParam(':promoPrice', $newProductPromoPrice);
+            $insertStatement->bindParam(':price', $newProductPrice);
+            $insertStatement->bindParam(':categoryId', $newProductCategoryId);
             $insertStatement->bindParam(':cartId', $_SESSION['cart_id']['cart_id']);
             $insertStatement->execute();
         } else {
