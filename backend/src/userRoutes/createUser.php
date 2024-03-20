@@ -1,6 +1,6 @@
 <?php
 
-require '../services/databaseConnect.php';
+require __DIR__ . '/../services/databaseConnect.php';
 
 $dbh = dbConnect();
 
